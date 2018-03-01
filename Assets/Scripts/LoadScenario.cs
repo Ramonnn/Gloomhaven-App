@@ -8,12 +8,12 @@ public class LoadScenario : MonoBehaviour
 {
 
     public string selectedScenario;
-    public List<Scenario> scenarioList;
+    public Dictionary<string, string[]> scenarioList;
 
     // Use this for initialization
     void Start()
     {
-        scenarioList = ScenarioCollection.scenarioList;
+        scenarioList = GetComponentInParent<ScenarioCollection>().scenarios;
     }
 
     // Update is called once per frame
@@ -26,15 +26,11 @@ public class LoadScenario : MonoBehaviour
     {
         selectedScenario = GameObject.Find("Scenario").GetComponentInChildren<TextMeshProUGUI>().text;
 
-        for (int i = 0; i < scenarioList.Count; i++)
+        foreach (KeyValuePair<string, string[]> item in scenarioList)
         {
-            if (selectedScenario == scenarioList[i].scenarioNumber)
+            if (selectedScenario == item.Key)
             {
-                foreach (string item in scenarioList[i])
-                {
-
-                }
-                Debug.Log("Enemies will be " + scenarioList[i].enemy1 + scenarioList[i].enemy2 + scenarioList[i].enemy3 + scenarioList[i].enemy4 + scenarioList[i].enemy5);
+                Debug.Log("The Scenario is " + item.Key + " and the enemies will be " + item.Value);
                 SceneManager.LoadScene("GameScene");
             }
         }
