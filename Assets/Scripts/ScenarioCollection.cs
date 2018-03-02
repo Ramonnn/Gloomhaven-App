@@ -15,7 +15,7 @@ public class ScenarioCollection : MonoBehaviour
     public Dictionary<string, string[]> scenarios = new Dictionary<string, string[]>();
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         scenarios.Add("Scenario 1", new string[] { "Ancient Artillery", "Bandit Archer" });
         scenarios.Add("Scenario 2", new string[] { "Inox Archer", "Bandit Archer", "Ancient Artillery" });
