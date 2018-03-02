@@ -2,7 +2,7 @@
 using TMPro;
 using System.Collections.Generic;
 
-public class DrawCard : MonoBehaviour
+public class DrawCard : MonoBehaviour //Most of this needs to move to DeckSpawner() in LoadScenario.cs. Leave only the actual random card draw and shuffle OnMousDown() here...
 {
 
     public Sprite cardFront, cardBack;
