@@ -1,71 +1,78 @@
 ﻿using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
-public class DrawCard : MonoBehaviour //Most of this needs to move to DeckSpawner() in LoadScenario.cs. Leave only the actual random card draw and shuffle OnMousDown() here...
+public class DrawCard : MonoBehaviour
 {
 
     public Sprite cardFront, cardBack;
-    private SpriteRenderer frontFacing, shuffleIcon;
+    private SpriteRenderer cardArt, shuffleIcon;
     private Card currentCard;
     public TextMeshPro initiative, monsterName, line1;
-    public Dictionary<string, List<Card>> decklist;
-    public List<Card> cardDeck;
-    public DeckCollection dc;
+    private List<Card> cardDeck = new List<Card>();
+    private List<Card> discardPile = new List<Card>();
+    private string objectName;
 
     private void Start()
     {
-        frontFacing = gameObject.GetComponent<SpriteRenderer>();
-        shuffleIcon = GameObject.Find("Shuffle").GetComponent<SpriteRenderer>();
-        dc = GetComponent<DeckCollection>();
-        decklist = DeckCollection.decklist;
-        cardDeck = DeckCollection.ancientArtillery;
+        objectName = gameObject.name; //GetInstanceID() could work too?
+        cardDeck = GetComponentInParent<DeckCollection>().decklist[objectName];
+        cardArt = gameObject.GetComponent<SpriteRenderer>();
+
+        SpriteRenderer[] renderers = GetComponentsInChildren<SpriteRenderer>();
+
+        foreach (SpriteRenderer renderer in renderers)
+        {
+            if (renderer.GetInstanceID() != GetComponent<SpriteRenderer>().GetInstanceID())
+            {
+                shuffleIcon = renderer;
+            }
+        }
     }
 
     public void OnMouseDown()
     {
 
-        if (frontFacing.sprite.Equals(cardBack))
+        if (cardArt.sprite.Equals(cardBack))
         {
-            int index = Random.Range(0, cardDeck.Count);
-            currentCard = cardDeck[index];
-            frontFacing.sprite = cardFront;
+            int topDeck = Random.Range(0, cardDeck.Count);
+            currentCard = cardDeck[topDeck];
+            cardArt.sprite = cardFront;
+
+            monsterName.text = objectName;
             initiative.text = currentCard.initiative;
-            //monsterName.text = decklist["Ancient Artillery"].;
             line1.text = currentCard.ln1;
 
-            shuffleIcon.enabled = currentCard.shuffle;
-
-            cardDeck.RemoveAt(index);
-            dc.discardPile.Add(currentCard);
+            cardDeck.RemoveAt(topDeck);
+            Debug.Log("Deck contains " + cardDeck.Count + " Cards");
+            discardPile.Add(currentCard);
 
             if (currentCard.shuffle)
             {
+                shuffleIcon.enabled = true;
                 Shuffle();
             }
         }
         else
         {
             shuffleIcon.enabled = false;
-            frontFacing.sprite = cardBack;
+            cardArt.sprite = cardBack;
             initiative.text = null;
             monsterName.text = null;
             line1.text = null;
 
         }
-
-        //Debug.Log("You have clicked the card!");
-        //card.sprite = Resources.Load<Sprite>("nameSprite" + Random.Range(0, deckSize));
     }
 
     void Shuffle()
     {
-        for (int i = 0; i < dc.discardPile.Count; i++)
+        for (int i = 0; i < discardPile.Count; i++)
         {
-            cardDeck.Add(dc.discardPile[i]);
+            cardDeck.Add(discardPile[i]);
         }
 
-        dc.discardPile.Clear();
+        discardPile.Clear();
     }
 
 

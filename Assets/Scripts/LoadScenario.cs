@@ -8,27 +8,21 @@ public class LoadScenario : MonoBehaviour
 
     public string selectedScenario;
     public Dictionary<string, string[]> scenarioList;
-    public GameObject[] spawnPoints;
-    public List<Card> cardDeck;
-    public GameObject card;
+    public string[] enemyNames;
+    public GameObject card, newDeck;
 
     // Use this for initialization
-    void Start()
+    private void Awake()
     {
         scenarioList = GetComponent<ScenarioCollection>().scenarios;
-        spawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
-        ScenarioLoader();
-
-
     }
 
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
-
+        DeckSpawner();
     }
 
-    public void ScenarioLoader()
+    public void DeckSpawner()
     {
         selectedScenario = PlayerPrefs.GetString("ChosenScenario");
 
@@ -36,21 +30,16 @@ public class LoadScenario : MonoBehaviour
         {
             if (selectedScenario == item.Key)
             {
-                foreach (string enemyName in item.Value)
-                {
-                    Debug.Log("Spawning Deck For " + enemyName);
-                    DeckSpawner(enemyName);
-                }
                 Debug.Log("The Scenario is " + item.Key);
+                enemyNames = item.Value;
+                for (int i = 0; i < item.Value.Length; i++)
+                {
+                    Debug.Log("Spawning Deck For " + enemyNames[i]);
+                    newDeck = Instantiate(card, GameObject.Find("DeckSpawn" + (i + 1)).transform.position, Quaternion.identity) as GameObject;
+                    newDeck.transform.parent = GameObject.Find("DeckSpawn" + (i + 1)).transform;
+                    newDeck.name = enemyNames[i];
+                }
             }
         }
-    }
-
-    public void DeckSpawner(string enemy)
-    {
-        int spawnPointIndex = Random.Range(0, spawnPoints.Length); //Random Placeholder, should be 'first available slot' (for loop?)
-        GameObject newDeck = Instantiate(card, spawnPoints[spawnPointIndex].transform) as GameObject; //This instantiates a copy of the 'Card' GameObject, calling it 'newDeck' (for no good reason)
-        cardDeck = DeckCollection.decklist[enemy]; //cardDeck now contains the specific List that contains the cards from an indicated enemydeck (e.g., if enemy is 'Ancient Artillery' it contains the list of card form the 'Ancient Artillery Deck')
-        // To connect newDeck with cardDeck so that newDeck can run 'DrawCard.cs' independently on its own unique cardDeck without conflicting with any other instantiations of a newDeck for other enemies...
     }
 }

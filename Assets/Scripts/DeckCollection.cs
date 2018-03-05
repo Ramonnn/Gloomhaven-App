@@ -31,9 +31,9 @@ public class DeckCollection : MonoBehaviour {
 
 
 
-    public static Dictionary<string, List<Card>> decklist = new Dictionary<string, List<Card>>();
+    public Dictionary<string, List<Card>> decklist = new Dictionary<string, List<Card>>();
 
-    private void Start()
+    private void Awake()
     {
 
     decklist.Add("Ancient Artillery", ancientArtillery);
@@ -42,7 +42,4 @@ public class DeckCollection : MonoBehaviour {
     decklist.Add("Inox Archer", archer);
 
     }
-
-    public List<Card> discardPile = new List<Card>();
-
 }
