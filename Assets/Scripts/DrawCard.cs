@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
-using UnityEngine.UI;
 
 public class DrawCard : MonoBehaviour
 {
