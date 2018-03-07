@@ -1,8 +1,8 @@
-	[   { "name": "#1 Black Barrow"
+{ "scenarios": [   { "name": "#1 Black Barrow"
         , "decks":
-            [   {"name": "Bandit Guard", "deck_name": "Guard"}
-            ,   {"name": "Bandit Archer", "deck_name": "Archer"}
-            ,   {"name": "Living Bones", "deck_name": "Living Bones"}
+            [   {"name": "Bandit Guard"}
+            ,   {"name": "Bandit Archer"}
+            ,   {"name": "Living Bones"}
             ]
         },
         { "name": "#2 Barrow Lair"
@@ -761,4 +761,4 @@
             ]
         }
 
-    ]
+    ] }
