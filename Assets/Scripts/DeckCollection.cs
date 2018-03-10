@@ -36,10 +36,10 @@ public class DeckCollection : MonoBehaviour {
     private void Awake()
     {
 
-    decklist.Add("Ancient Artillery", ancientArtillery);
-    decklist.Add("Bandit Archer", archer);
-    decklist.Add("City Archer", archer);
-    decklist.Add("Inox Archer", archer);
+        decklist.Add("Ancient Artillery", ancientArtillery);
+        decklist.Add("Bandit Archer", archer);
+        decklist.Add("City Archer", archer);
+        decklist.Add("Inox Archer", archer);
 
     }
 }

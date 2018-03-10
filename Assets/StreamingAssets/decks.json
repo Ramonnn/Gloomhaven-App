@@ -1,5 +1,5 @@
-[
-        { "class": "Ancient Artillery"
+{ "decks" : [
+        { "monsterclass": "Ancient Artillery"
         , "cards":
             [ [false, "46", "* %attack% -1", "** %range% +2"]
             , [true,  "71", "* %attack% +0", "** %range% +0", "** All adjacent enemies suffer 2 damage"]
@@ -11,7 +11,7 @@
             , [false, "46", "* %attack% -1 %aoe-triangle-2-side%", "** %range% +0","** %immobilize%"]
             ]
         },
-        { "class": "Archer"
+        { "monsterclass": "Archer"
         , "cards":
             [ [false, "16", "* %move% +1", "* %attack% -1", "** %range% +0"]
             , [false, "31", "* %move% +0", "* %attack% +0", "** %range% +0"]
@@ -23,7 +23,7 @@
             , [true,  "29", "* %move% +0", "* %attack% -1", "** %range% +1", "** %immobilize%"]
             ]
         },
-        { "class": "Boss"
+        { "monsterclass": "Boss"
         , "cards":
             [ [false, "11", "* Special 2"]
             , [false, "14", "* Special 2"]
@@ -35,7 +35,7 @@
             , [false, "52", "* %move% -1", "* %attack% -1", "** %range% 3", "** %target% 2"]
             ]
         },
-        { "class": "Cave Bear"
+        { "monsterclass": "Cave Bear"
         , "cards":
             [ [false, "13", "* %move% +1", "* %attack% -1"]
             , [false, "14", "* %move% -1", "* %attack% -1", "** %immobilize%"]
@@ -47,7 +47,7 @@
             , [false, "03", "* %shield% 1", "* %retaliate% 2", "* %heal% 2", "** Self"]
             ]
         },
-        { "class": "Cultist"
+        { "monsterclass": "Cultist"
         , "cards":
             [ [false, "10", "* %move% -1", "* %attack% -1", "* On Death:", "** %attack% +2 %aoe-circle-with-middle-black%"]
             , [false, "10", "* %move% -1", "* %attack% -1", "* On Death:", "** %attack% +2 %aoe-circle-with-middle-black%"]
@@ -59,7 +59,7 @@
             , [false, "31", "* %move% -1", "* %heal% 3", "** %range% 3"]
             ]
         },
-        { "class": "Deep Terror"
+        { "monsterclass": "Deep Terror"
         , "cards":
             [ [false, "65", "* %attack% +0", "** %range% 3", "** %target% 3", "** %curse%"]
             , [true,  "60", "* %attack% +0 %aoe-line-6-with-black%", "** %pierce% 3"]
@@ -71,7 +71,7 @@
             , [false, "54", "* %wound% and %poison%", "** Target all adjacent enemies", "* %attack% +0", "** %range% 4"]
             ]
         },
-        { "class": "Earth Demon"
+        { "monsterclass": "Earth Demon"
         , "cards":
             [ [true,  "40", "* %heal% 3", "** Self", "* %earth%%use_element%: <span class='small'>%immobilize% Target all enemies within %range% 3</span>"]
             , [true,  "42", "* %move% +1", "* %attack% -1"]
@@ -83,7 +83,7 @@
             , [false, "87", "* %move% +0", "* %attack% -1 <div class='collapse'>%aoe-4-with-black%</div>", "* %any%%use_element%: %earth%"]
             ]
         },
-        { "class": "Flame Demon"
+        { "monsterclass": "Flame Demon"
         , "cards":
             [ [false, "03", "* %move% +1", "* %attack% -1", "** %range% +0","* %fire%"]
             , [false, "24", "* %move% +0", "* %attack% +0", "** %range% +0","* %fire%"]
@@ -95,7 +95,7 @@
             , [false, "08", "* %move% -1", "* <span class='small'> Create a 4 damage trap in an adjacent empty hex closest to an enemy </span>", "* %any%%use_element%: %fire%"]
             ]
         },
-        { "class": "Frost Demon"
+        { "monsterclass": "Frost Demon"
         , "cards":
             [ [false, "18", "* %immobilize%", "** Target all enemies within %range% 2", "* %ice%%use_element%: <span class='small'>%heal% 3<br/>Self</span>"]
             , [false, "38", "* %move% +1", "* %attack% -1"]
@@ -107,7 +107,7 @@
             , [false, "18", "* %shield% 2", "* %move% +1", "* %fire%%use_element%: <span class='small'>Frost Demon suffers 1 damage</span>"]
             ]
         },
-        { "class": "Giant Viper"
+        { "monsterclass": "Giant Viper"
         , "cards":
             [ [true,  "32", "* %move% +0", "* %attack% +0", "** Add +2 Attack if the target is adjacent to any of the Giant Viper's allies."]
             , [true,  "32", "* %move% +0", "* %attack% +0", "** Add +2 Attack if the target is adjacent to any of the Giant Viper's allies."]
@@ -119,7 +119,7 @@
             , [false, "23", "* %move% -1", "* %attack% -1", "** %immobilize%", "* %attack% -1"]
             ]
         },
-        { "class": "Guard"
+        { "monsterclass": "Guard"
         , "cards":
             [ [true,  "15", "* %shield% 1", "* %retaliate% 2"]
             , [false, "30", "* %move% +1", "* %attack% -1"]
@@ -131,7 +131,7 @@
             , [true , "15", "* %shield% 1", "* %attack% +0", "** %poison%"]
             ]
         },
-        { "class": "Harrower Infester"
+        { "monsterclass": "Harrower Infester"
         , "cards":
             [ [false, "38", "* %move% -1", "* %attack% +1", "** %target% 2"]
             , [false, "07", "* %move% +0", "* %attack% -1", "** %poison%", "* %dark%"]
@@ -143,7 +143,7 @@
             , [true,  "07", "* %attack% -1", "** %range% 3", "** %muddle%", "* %heal% 4", "** Self"]
             ]
         },
-        { "class": "Hound"
+        { "monsterclass": "Hound"
         , "cards":
             [ [false, "06", "* %move% -1", "* %attack% +0", "** %immobilize%"]
             , [false, "07", "* %move% +0", "* %muddle%", "** Target all adjacent enemies"]
@@ -155,7 +155,7 @@
             , [false, "72", "* %attack% -1", "** %pierce% 2", "* %move% -2", "* %attack% -1", "** %pierce% 2"]
             ]
 		},
-        { "class": "Imp"
+        { "monsterclass": "Imp"
         , "cards":
             [ [false, "05", "* %shield% 5", "* %heal% 1", "** Self"]
             , [false, "37", "* %move% +0", "* %attack% +0","** %range% +0"]
@@ -167,7 +167,7 @@
             , [false, "24", "* %strengthen%", "** Affect all allies within %range% 2", "* %muddle%", "** Target all enemies within %range% 2"]
             ]
         },
-        { "class": "Living Bones"
+        { "monsterclass": "Living Bones"
         , "cards":
             [ [false, "64", "* %move% -1", "* %attack% +1"]
             , [true,  "20", "* %move% -2", "* %attack% +0", "* %heal% 2", "** Self"]
@@ -179,7 +179,7 @@
             , [true,  "12", "* %shield% 1", "* %heal% 2", "** Self"]
             ]
         },
-        { "class": "Living Corpse"
+        { "monsterclass": "Living Corpse"
         , "cards":
             [ [false, "21", "* %move% +1", "* %muddle% and %immobilize%", "** Target one adjacent enemy"]
             , [false, "47", "* %move% +1", "* %attack% -1"]
@@ -191,7 +191,7 @@
             , [false, "32", "* %attack% +2", "** %push% 1", "* Living Corpse suffers 1 damage."]
             ]
         },
-        { "class": "Living Spirit"
+        { "monsterclass": "Living Spirit"
         , "cards":
             [ [true,  "22", "* %move% -1", "* %attack% -1", "** %range% +0", "** %muddle%"]
             , [true,  "33", "* %move% +0", "* %attack% -1", "** %range% +0", "** Target all enemies within range"]
@@ -203,7 +203,7 @@
             , [false, "67", "* %move% -1", "* %attack% +1", "** %range% +0", "** %ice%%use_element%: %stun%"]
             ]
         },
-        { "class": "Lurker"
+        { "monsterclass": "Lurker"
         , "cards":
             [ [true,  "11", "* %shield% 1", "** %ice%%use_element%: %shield% 2 instead","* %wound%", "** Target all adjacent enemies"]
             , [false, "28", "* %move% +1", "* %attack% -1"]
@@ -215,7 +215,7 @@
             , [true,  "23", "* %shield% 1", "* %move% +0", "* %attack% -1", "* %ice%"]
             ]
         },
-        { "class": "Night Demon"
+        { "monsterclass": "Night Demon"
         , "cards":
             [ [false, "04", "* %move% +1", "* %attack% -1", "* %dark%"]
             , [false, "07", "* %move% +1", "* %attack% -1", "* %dark%%use_element%: %invisible%", "** Self"]
@@ -227,7 +227,7 @@
             , [false, "15", "* %move% +0", "* %attack% -1", "* <span class='small'>All adjacent enemies and allies suffer 1 damage.</span>", "* <span class='small'>%any%%use_element%: %dark%</span>"]
             ]
         },
-        { "class": "Ooze"
+        { "monsterclass": "Ooze"
         , "cards":
           [ [false, "36", "* %move% +1", "* %attack% -1", "** %range% +0"]
             , [false, "57", "* %move% +0", "* %attack% +0", "** %range% +0"]
@@ -239,7 +239,7 @@
             , [false, "66", "* %move% -1", "* %loot% 1", "* %heal% 2", "** Self"]
             ]
         },
-        { "class": "Rending Drake"
+        { "monsterclass": "Rending Drake"
         , "cards":
             [ [false, "12", "* %move% +1", "* %attack% -1"]
             , [true,  "13", "* %attack% -1", "* %move% -1", "* %attack% -1"]
@@ -251,7 +251,7 @@
             , [true,  "72", "* %attack% -1", "* %attack% -1", "* %attack% -2"]
             ]
         },
-        { "class": "Savvas Icestorm"
+        { "monsterclass": "Savvas Icestorm"
         , "cards":
             [ [false, "70", "* %push% 2", "** Target all adjacent enemies", "** %air%%use_element%: %push% 4 instead", "* %attack% +1", "** %range% +1"]
             , [false, "98", "* Summon normal Wind Demon", "* %air%"]
@@ -263,7 +263,7 @@
             , [true,  "35", "* %move% -1", "* %attack% -1 %aoe-triangle-3-side-with-corner-black% ", "* %ice%"]
             ]
         },
-        { "class": "Savvas Lavaflow"
+        { "monsterclass": "Savvas Lavaflow"
         , "cards":
             [ [false, "97", "* Summon normal Flame Demon", "* %fire%"]
             , [false, "97", "* Summon normal Earth Demon", "* %earth%"]
@@ -275,7 +275,7 @@
             , [true,  "68", "* %move% -1", "* %attack% -1", "** %range% 3", "** %target% 2", "* %fire%"]
             ]
         },
-        { "class": "Scout"
+        { "monsterclass": "Scout"
         , "cards":
             [ [false, "29", "* %move% -1", "* %attack% -1", "** %range% 3"]
             , [false, "40", "* %move% +1", "* %attack% -1"]
@@ -287,7 +287,7 @@
             , [false, "79",  "* %attack% -1", "** %range% 4", "** %target% 2"]
             ]
         },
-        { "class": "Shaman"
+        { "monsterclass": "Shaman"
         , "cards":
             [ [false, "08", "* %move% +0", "* %attack% -1", "** %range% +0", "** %disarm%"]
             , [false, "08", "* %move% -1", "* %attack% +0", "** %range% +0", "** %immobilize%"]
@@ -299,7 +299,7 @@
             , [false, "09", "* %move% +1", "* %attack% -1", "** %range% +0, %curse%, %target% 2"]
             ]
         },
-        { "class": "Spitting Drake"
+        { "monsterclass": "Spitting Drake"
         , "cards":
           [ [false, "32", "* %move% +1", "* %attack% -1", "** %range% +0"]
             , [false, "52", "* %move% +0", "* %attack% +0", "** %range% +0"]
@@ -311,7 +311,7 @@
             , [true,  "89", "* %move% -1", "* %attack% -2 %aoe-circle%", "** %range% +0", "** %poison%"]
             ]
         },
-        { "class": "Stone Golem"
+        { "monsterclass": "Stone Golem"
         , "cards":
             [ [false, "11", "* %retaliate% 3", "** %range% 3"]
             , [false, "28", "* %move% +1", "* %attack% +0", "* Stone Golem suffers 1 damage."]
@@ -323,7 +323,7 @@
             , [false, "83", "* %move% +0", "* %attack% -1", "** Target all adjacent enemies"]
             ]
         },
-        { "class": "Sun Demon"
+        { "monsterclass": "Sun Demon"
         , "cards":
             [ [true,  "17", "* %heal% 3", "** %range% 3", "** %light%%use_element%: Target all allies within range"]
             , [false, "36", "* %move% +0", "* %attack% +0", "** Target all adjacent enemies", "* %light%"]
@@ -335,7 +335,7 @@
             , [false, "50", "* %move% +0", "* %attack% +0", "** %range% 3", "* %any%%use_element%: %light%"]
             ]
         },
-        { "class": "Wind Demon"
+        { "monsterclass": "Wind Demon"
         , "cards":
           [ [false, "09", "* %attack% -1", "** %range% +0", "* %heal% 1", "** Self", "* %air%%use_element%: %invisible%<br/><span class='small'>Self</span>"]
             , [true,  "21", "* %move% +0", "* %attack% +0", "** %range% +0, %pull% 1", "* %air%"]
@@ -347,4 +347,4 @@
             , [false, "02", "* %shield% 1", "* %move% -1", "* %attack% -1", "** %range% +0", "* %any%%use_element%: %air%"]
             ]
         }
-]
+] }
