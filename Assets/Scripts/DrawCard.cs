@@ -4,19 +4,25 @@ using System.Collections.Generic;
 
 public class DrawCard : MonoBehaviour
 {
-
     public Sprite cardFront, cardBack;
     private SpriteRenderer cardArt, shuffleIcon;
     private Card currentCard;
     public TextMeshPro initiative, monsterName, line1;
-    private List<Card> cardDeck = new List<Card>();
+    public List<Card> cardDeck = new List<Card>();
     private List<Card> discardPile = new List<Card>();
     private string objectName;
+    public List<Deck> deckList;
+    public List<Combinations> monsterDeckCombi;
 
     private void Start()
     {
+        deckList = GetComponentInParent<LoadScenario>().loadedDecks.decks;
+        monsterDeckCombi = GetComponentInParent<LoadScenario>().loadedMonsters.monsters;
         objectName = gameObject.name; //GetInstanceID() could work too?
-        cardDeck = GetComponentInParent<DeckCollection>().decklist[objectName];
+        Debug.Log(monsterDeckCombi[1].name + objectName);
+        DeckLoader();
+
+
         cardArt = gameObject.GetComponent<SpriteRenderer>();
 
         SpriteRenderer[] renderers = GetComponentsInChildren<SpriteRenderer>();
@@ -26,6 +32,26 @@ public class DrawCard : MonoBehaviour
             if (renderer.GetInstanceID() != GetComponent<SpriteRenderer>().GetInstanceID())
             {
                 shuffleIcon = renderer;
+            }
+        }
+    }
+
+    public void DeckLoader()
+    {
+        for (int i = 0; i < monsterDeckCombi.Count; i++)
+        {
+            if (objectName == monsterDeckCombi[i].name)
+            {
+                Debug.Log("Loading Deck for " + monsterDeckCombi[i].name);
+                string getMonsterClass = monsterDeckCombi[i].monsterclass;
+                for (int x = 0; x < deckList.Count; x++)
+                {
+                    if (getMonsterClass == deckList[x].monsterclass)
+                    {
+                        cardDeck = deckList[x].cards;
+                    }
+
+                }
             }
         }
     }
@@ -41,7 +67,7 @@ public class DrawCard : MonoBehaviour
 
             monsterName.text = objectName;
             initiative.text = currentCard.initiative;
-            line1.text = currentCard.ln1;
+            line1.text = currentCard.cardlines[0]; // for loop so every piece of information gets its own line.
 
             cardDeck.RemoveAt(topDeck);
             Debug.Log("Deck contains " + cardDeck.Count + " Cards");
