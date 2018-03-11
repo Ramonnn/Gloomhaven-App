@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 using System.Collections.Generic;
 
 public class DrawCard : MonoBehaviour
@@ -7,7 +7,7 @@ public class DrawCard : MonoBehaviour
     public Sprite cardFront, cardBack;
     private SpriteRenderer cardArt, shuffleIcon;
     private Card currentCard;
-    public TextMeshPro initiative, monsterName, line1;
+    public TextMesh initiative, monsterName, line1;
     public List<Card> cardDeck = new List<Card>();
     private List<Card> discardPile = new List<Card>();
     private string objectName;

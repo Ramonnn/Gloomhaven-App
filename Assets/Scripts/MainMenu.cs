@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
@@ -9,7 +9,7 @@ public class MainMenu : MonoBehaviour
 
     public void SubmitSettings()
     {
-        chosenScenario = GameObject.Find("Scenario").GetComponentInChildren<TextMeshProUGUI>().text;
+        chosenScenario = GameObject.Find("Scenario").GetComponentInChildren<Text>().text;
 
         PlayerPrefs.SetString("ChosenScenario", chosenScenario);
         PlayerPrefs.SetInt("NumberOfPlayers", numberOfPlayers);
