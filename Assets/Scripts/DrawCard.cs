@@ -18,7 +18,7 @@ public class DrawCard : MonoBehaviour
     {
         deckList = GetComponentInParent<LoadScenario>().loadedDecks.decks;
         monsterDeckCombi = GetComponentInParent<LoadScenario>().loadedMonsters.monsters;
-        objectName = gameObject.name; //GetInstanceID() could work too?
+        objectName = gameObject.name; //GetInstanceID() could work too? THIS NEEDS TO CHANGE. INDIVIDUAL CARDS MAYBE?
         Debug.Log(monsterDeckCombi[1].name + objectName);
         DeckLoader();
 
@@ -67,8 +67,11 @@ public class DrawCard : MonoBehaviour
 
             monsterName.text = objectName;
             initiative.text = currentCard.initiative;
-            line1.text = currentCard.cardlines[0]; // for loop so every piece of information gets its own line.
-
+            for (int i = 0; i < currentCard.cardlines.Count; i++)
+            {
+                line1.text = line1.text + currentCard.cardlines[i] + "\n";
+            }
+            
             cardDeck.RemoveAt(topDeck);
             Debug.Log("Deck contains " + cardDeck.Count + " Cards");
             discardPile.Add(currentCard);
