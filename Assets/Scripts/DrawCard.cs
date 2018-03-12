@@ -19,7 +19,6 @@ public class DrawCard : MonoBehaviour
         deckList = GetComponentInParent<LoadScenario>().loadedDecks.decks;
         monsterDeckCombi = GetComponentInParent<LoadScenario>().loadedMonsters.monsters;
         objectName = gameObject.name; //GetInstanceID() could work too? THIS NEEDS TO CHANGE. INDIVIDUAL CARDS MAYBE?
-        Debug.Log(monsterDeckCombi[1].name + objectName);
         DeckLoader();
 
 
@@ -42,7 +41,7 @@ public class DrawCard : MonoBehaviour
         {
             if (objectName == monsterDeckCombi[i].name)
             {
-                Debug.Log("Loading Deck for " + monsterDeckCombi[i].name);
+                Debug.Log("Loading contents for " + monsterDeckCombi[i].name);
                 string getMonsterClass = monsterDeckCombi[i].monsterclass;
                 for (int x = 0; x < deckList.Count; x++)
                 {
