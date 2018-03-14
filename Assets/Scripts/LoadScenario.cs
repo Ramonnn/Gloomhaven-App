@@ -9,9 +9,11 @@ public class LoadScenario : MonoBehaviour
     private string scenariosFileName = "scenarios.json";
     private string decksFileName = "decks.json";
     private string monstersFileName = "monsters.json";
+    private string monsterStatsFileName = "monsterstats.json";
     public ScenarioList loadedScenarios;
     public DecksList loadedDecks;
     public Monsters loadedMonsters;
+    //public MonsterStats loadedMonsterStats;
 
     public string selectedScenario;
     public List<Scenario> scenarioList;
@@ -43,11 +45,11 @@ public class LoadScenario : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Cannot load game data!");
+            Debug.LogError("Cannot load Scenario data!");
         }
     }
 
-    private void LoadDeckData() //could be combined with LoadScenarioData()
+    private void LoadDeckData()
     {
         string filePath = Path.Combine(Application.streamingAssetsPath, decksFileName);
         if (File.Exists(filePath))
@@ -57,11 +59,11 @@ public class LoadScenario : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Cannot load game data!");
+            Debug.LogError("Cannot load Deck data!");
         }
     }
 
-    private void LoadCombinations() //could be combined with LoadScenarioData()
+    private void LoadCombinations()
     {
         string filePath = Path.Combine(Application.streamingAssetsPath, monstersFileName);
         if (File.Exists(filePath))
@@ -71,9 +73,26 @@ public class LoadScenario : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Cannot load game data!");
+            Debug.LogError("Cannot load Combination data!");
         }
     }
+
+    ////I have to use SimpleJSON here. File is to big and complicated to manually adjust to Unity's liking. Please Upvote the C#/JSON dictionary conversion implementation on the Unity Support website -.-'
+    //private void LoadMonsterStats()
+    //{
+    //    string filePath = Path.Combine(Application.streamingAssetsPath, monsterStatsFileName);
+    //    if (File.Exists(filePath))
+    //    {
+    //        string dataAsJson = File.ReadAllText(filePath);
+    //        var JSONconscious = JSON.Parse(dataAsJson);
+    //        monsters = JSONconscious["monsters"].AsArray; // hmmmm
+    //        bosses = JSONconscious["bosses"].AsArray;
+    //    }
+    //    else
+    //    {
+    //        Debug.LogError("Cannot load MonsterStats data!");
+    //    }
+    //}
 
     public void ScenarioLoader()
     {
@@ -157,3 +176,33 @@ public struct Combinations
     public string monsterclass;
 
 }
+
+// Load Monster Stats
+
+//[System.Serializable]
+//public class MonsterStats
+//{
+//    public List<IndividualMonster> monster;
+//    public List<Boss> bosses;
+//}
+
+////[System.Serializable]
+////public struct Boss
+////{
+////    public string name;
+////    public List<...> monsters;
+////}
+
+
+//[System.Serializable]
+//public struct IndividualMonster
+//{
+//    string monsterName;
+//    public List<Level> monsters;
+//}
+
+//[System.Serializable]
+//public struct Level
+//{
+//    public List<Level> monsters;
+//}
