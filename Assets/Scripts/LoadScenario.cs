@@ -7,34 +7,25 @@ using System;
 public class LoadScenario : MonoBehaviour
 {
     private string scenariosFileName = "scenarios.json";
-    private string decksFileName = "decks.json";
     private string monstersFileName = "monsters.json";
-    private string monsterStatsFileName = "monsterstats.json";
     public ScenarioList loadedScenarios;
-    public DecksList loadedDecks;
     public Monsters loadedMonsters;
-    //public MonsterStats loadedMonsterStats;
 
-    public string selectedScenario;
-    public List<Scenario> scenarioList;
     public List<Monster> enemyNames;
     public GameObject card, newDeck;
-    public string scenarioName;
 
     private void Awake()
     {
-        LoadScenarioData();
-        LoadDeckData();
+        LoadScenarioData(PlayerPrefs.GetString("ChosenScenario"));
         LoadCombinations();
     }
 
     void Start()
     {
-        scenarioList = loadedScenarios.scenarios;
-        ScenarioLoader();
+
     }
 
-    private void LoadScenarioData()
+    private void LoadScenarioData(string selectedscenario)
     {
         string filePath = Path.Combine(Application.streamingAssetsPath, scenariosFileName);
 
@@ -42,24 +33,28 @@ public class LoadScenario : MonoBehaviour
         {
             string dataAsJson = File.ReadAllText(filePath);
             loadedScenarios = JsonUtility.FromJson<ScenarioList>(dataAsJson);
+
+            foreach (Scenario item in loadedScenarios.scenarios)
+            {
+                if (selectedscenario == item.name)
+                {
+                    Debug.Log("The Scenario is " + item.name);
+                    enemyNames = item.decks;
+
+                    for (int i = 0; i < enemyNames.Count; i++)
+                    {
+                        Debug.Log("Spawning Deck For " + enemyNames[i].name);
+                        newDeck = Instantiate(card, GameObject.Find("DeckSpawn" + (i + 1)).transform.position, Quaternion.identity) as GameObject;
+                        newDeck.transform.parent = GameObject.Find("DeckSpawn" + (i + 1)).transform;
+                        newDeck.name = enemyNames[i].name;
+                    }
+                }
+
+            }
         }
         else
         {
             Debug.LogError("Cannot load Scenario data!");
-        }
-    }
-
-    private void LoadDeckData()
-    {
-        string filePath = Path.Combine(Application.streamingAssetsPath, decksFileName);
-        if (File.Exists(filePath))
-        {
-            string dataAsJson = File.ReadAllText(filePath);
-            loadedDecks = JsonUtility.FromJson<DecksList>(dataAsJson);
-        }
-        else
-        {
-            Debug.LogError("Cannot load Deck data!");
         }
     }
 
@@ -74,45 +69,6 @@ public class LoadScenario : MonoBehaviour
         else
         {
             Debug.LogError("Cannot load Combination data!");
-        }
-    }
-
-    ////I have to use SimpleJSON here. File is to big and complicated to manually adjust to Unity's liking. Please Upvote the C#/JSON dictionary conversion implementation on the Unity Support website -.-'
-    //private void LoadMonsterStats()
-    //{
-    //    string filePath = Path.Combine(Application.streamingAssetsPath, monsterStatsFileName);
-    //    if (File.Exists(filePath))
-    //    {
-    //        string dataAsJson = File.ReadAllText(filePath);
-    //        var JSONconscious = JSON.Parse(dataAsJson);
-    //        monsters = JSONconscious["monsters"].AsArray; // hmmmm
-    //        bosses = JSONconscious["bosses"].AsArray;
-    //    }
-    //    else
-    //    {
-    //        Debug.LogError("Cannot load MonsterStats data!");
-    //    }
-    //}
-
-    public void ScenarioLoader()
-    {
-        selectedScenario = PlayerPrefs.GetString("ChosenScenario"); // this needs to change from e.g. Scenario 1 to #1 Black Barrows.
-        foreach (Scenario item in scenarioList)
-        {
-            if (selectedScenario == item.name)
-            {
-                Debug.Log("The Scenario is " + item.name);
-                scenarioName = item.name;
-                enemyNames = item.decks;
-
-                for (int i = 0; i < enemyNames.Count; i++)
-                {
-                    Debug.Log("Spawning Deck For " + enemyNames[i].name);
-                    newDeck = Instantiate(card, GameObject.Find("DeckSpawn" + (i + 1)).transform.position, Quaternion.identity) as GameObject;
-                    newDeck.transform.parent = GameObject.Find("DeckSpawn" + (i + 1)).transform;
-                    newDeck.name = enemyNames[i].name;
-                }
-            }
         }
     }
 }
@@ -176,33 +132,3 @@ public struct Combinations
     public string monsterclass;
 
 }
-
-// Load Monster Stats
-
-//[System.Serializable]
-//public class MonsterStats
-//{
-//    public List<IndividualMonster> monster;
-//    public List<Boss> bosses;
-//}
-
-////[System.Serializable]
-////public struct Boss
-////{
-////    public string name;
-////    public List<...> monsters;
-////}
-
-
-//[System.Serializable]
-//public struct IndividualMonster
-//{
-//    string monsterName;
-//    public List<Level> monsters;
-//}
-
-//[System.Serializable]
-//public struct Level
-//{
-//    public List<Level> monsters;
-//}
