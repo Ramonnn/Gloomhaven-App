@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System;
+using UnityEngine.UI;
 
 public class LoadScenario : MonoBehaviour //Script Execution Order Adjusted -100 from default
 {
@@ -49,6 +50,8 @@ public class LoadScenario : MonoBehaviour //Script Execution Order Adjusted -100
                         GameObject RenameSpawn = GameObject.Find("DeckSpawn");
                         RenameSpawn.name = enemyNames[i].name;
                         newDeck.name = enemyNames[i].name;
+                        newEnemyFrame.name = enemyNames[i].name;
+                        newEnemyFrame.GetComponentInChildren<Text>().text = enemyNames[i].name;
                     }
                 }
 
