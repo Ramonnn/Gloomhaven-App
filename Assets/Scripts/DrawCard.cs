@@ -5,7 +5,7 @@ using System.IO;
 using SimpleJSON;
 
 
-public class DrawCard : MonoBehaviour
+public class DrawCard : MonoBehaviour //Script Execution Order Adjusted +100 from default
 {
     public Sprite cardFront, cardBack;
     private SpriteRenderer cardArt, shuffleIcon;

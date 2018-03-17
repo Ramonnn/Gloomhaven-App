@@ -4,7 +4,7 @@ using UnityEngine;
 using System.IO;
 using System;
 
-public class LoadScenario : MonoBehaviour
+public class LoadScenario : MonoBehaviour //Script Execution Order Adjusted -100 from default
 {
     private string scenariosFileName = "scenarios.json";
     private string monstersFileName = "monsters.json";
@@ -12,7 +12,7 @@ public class LoadScenario : MonoBehaviour
     public Monsters loadedMonsters;
 
     public List<Monster> enemyNames;
-    public GameObject card, newDeck;
+    public GameObject card, newDeck, newEnemyFrame, frame;
 
     private void Awake()
     {
@@ -44,8 +44,10 @@ public class LoadScenario : MonoBehaviour
                     for (int i = 0; i < enemyNames.Count; i++)
                     {
                         Debug.Log("Spawning Deck For " + enemyNames[i].name);
-                        newDeck = Instantiate(card, GameObject.Find("DeckSpawn" + (i + 1)).transform.position, Quaternion.identity) as GameObject;
-                        newDeck.transform.parent = GameObject.Find("DeckSpawn" + (i + 1)).transform;
+                        newEnemyFrame = Instantiate(frame, GameObject.Find("GridDynamic").transform);
+                        newDeck = Instantiate(card, GameObject.Find("DeckSpawn").transform);
+                        GameObject RenameSpawn = GameObject.Find("DeckSpawn");
+                        RenameSpawn.name = enemyNames[i].name;
                         newDeck.name = enemyNames[i].name;
                     }
                 }
