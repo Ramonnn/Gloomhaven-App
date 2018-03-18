@@ -15,7 +15,7 @@ public class LoadMonsterData : MonoBehaviour {
     public Sprite currentMonsterImage;
 
     void Start () {
-        LoadMonsterStats(gameObject.name);
+        LoadMonsterStats(transform.parent.name);
     }
 
     private void LoadMonsterStats(string monstername) // Merge with JSONNODE?
@@ -44,7 +44,7 @@ public class LoadMonsterData : MonoBehaviour {
             genericStatsNormal.Add(monsterAttack.ToString());
             genericStatsNormal.Add(monsterRange.ToString());
 
-            transform.GetChild(5).GetComponentInChildren<Text>().text = genericStatsNormal[0] + "\n" + genericStatsNormal[1] + "\n" + genericStatsNormal[2] + "\n" + genericStatsNormal[3];
+            transform.GetChild(4).GetComponentInChildren<Text>().text = genericStatsNormal[0] + "\n" + genericStatsNormal[1] + "\n" + genericStatsNormal[2] + "\n" + genericStatsNormal[3];
 
 
 
@@ -64,16 +64,16 @@ public class LoadMonsterData : MonoBehaviour {
             genericStatsElite.Add(monsterAttackElite.ToString());
             genericStatsElite.Add(monsterRangeElite.ToString());
 
-            transform.GetChild(6).GetComponentInChildren<Text>().text = genericStatsElite[0] + "\n" + genericStatsElite[1] + "\n" + genericStatsElite[2] + "\n" + genericStatsElite[3];
+            transform.GetChild(5).GetComponentInChildren<Text>().text = genericStatsElite[0] + "\n" + genericStatsElite[1] + "\n" + genericStatsElite[2] + "\n" + genericStatsElite[3];
 
 
 
             foreach (Sprite image in monsterImages)
             {
-                if (image.name == "Horz-" + gameObject.name)
+                if (image.name == "Horz-" + transform.parent.name)
                 {
                     Debug.Log("found Image");
-                    transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = image; //Good alternative for "Find" method. Or use a game manager dictionary containing all instantiations? and search by key...
+                    transform.GetChild(1).GetComponent<Image>().sprite = image; //Good alternative for "Find" method. Or use a game manager dictionary containing all instantiations? and search by key...
                     currentMonsterImage = image; //Image spawn in enemyframe
                 }
             }
