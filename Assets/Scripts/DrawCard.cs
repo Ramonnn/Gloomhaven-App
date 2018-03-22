@@ -8,7 +8,7 @@ using SimpleJSON;
 public class DrawCard : MonoBehaviour //Script Execution Order Adjusted +100 from default
 {
     public Sprite cardFront, cardBack;
-    private SpriteRenderer cardArt, shuffleIcon;
+    private Image cardArt, shuffleIcon;
     private Card currentCard;
     public TextMesh initiative, monsterName, line1;
     public List<Card> cardDeck = new List<Card>();
@@ -25,13 +25,13 @@ public class DrawCard : MonoBehaviour //Script Execution Order Adjusted +100 fro
         DeckLoader(gameObject.name);
 
 
-        cardArt = gameObject.GetComponent<SpriteRenderer>();
+        cardArt = gameObject.GetComponent<Image>();
 
-        SpriteRenderer[] renderers = GetComponentsInChildren<SpriteRenderer>();
+        Image[] renderers = GetComponentsInChildren<Image>(); // CAN BE REFACTORED WITH transform.GetChild().GetComponent<SpriteRenderer>();
 
-        foreach (SpriteRenderer renderer in renderers)
+        foreach (Image renderer in renderers)
         {
-            if (renderer.GetInstanceID() != GetComponent<SpriteRenderer>().GetInstanceID())
+            if (renderer.GetInstanceID() != GetComponent<Image>().GetInstanceID())
             {
                 shuffleIcon = renderer;
             }
@@ -68,7 +68,7 @@ public class DrawCard : MonoBehaviour //Script Execution Order Adjusted +100 fro
         }
     }
 
-    public void OnMouseDown()
+    public void DrawACard()
     {
 
         if (cardArt.sprite.Equals(cardBack))

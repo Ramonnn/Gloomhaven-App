@@ -5,11 +5,8 @@ using UnityEngine.UI;
 
 public class EnemyPassThrough : MonoBehaviour
 {
-    private Dictionary<string, GameObject> popUpEnemies = new Dictionary<string, GameObject>();
     private bool alreadyFetched = false;
     private Sprite popUpSprite;
-
-    public GameObject enemyShell;
 
     public void FetchPlaceHolders() //On Button Press... Maybe could already do this on scene instantiation? Don't know what is more efficient.
     {
@@ -18,52 +15,48 @@ public class EnemyPassThrough : MonoBehaviour
             alreadyFetched = true;
             for (int i = 0; i < gameObject.transform.childCount - 1; i++)
             {
-                popUpEnemies.Add(gameObject.transform.GetChild(i).name, gameObject.transform.GetChild(i).gameObject);
                 popUpSprite = GetComponentInParent<LoadMonsterData>().currentMonsterImage;
                 gameObject.transform.GetChild(i).gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = popUpSprite;
             }
-
         }
+        transform.parent.GetChild(0).transform.gameObject.SetActive(false);
+        transform.gameObject.SetActive(true);
     }
 
-    public void ClosePopUp() //Communicates that monster# needs to be in the scene as a normal/elite. (Code somewhere else to check whether that monster is new or already in the scene.
+
+    public void ClosePopUp() // ToggleGroup itteration doesn't work for some reason. Now I need to add breaks in order for the else statement not to run at unwanted moments... Least elegant code ever.
     {
-        foreach (KeyValuePair<string, GameObject> placeholder in popUpEnemies)
+        for (int i = 0; i < gameObject.transform.childCount - 1; i++)
         {
-            foreach (Toggle toggle in placeholder.Value.GetComponentsInChildren<Toggle>())
+            foreach (Toggle toggle in gameObject.transform.GetChild(i).GetComponentsInChildren<Toggle>())
             {
-                if (toggle.isOn == true && toggle.name == "Normal")
-                {
-                    string enemyNumber = placeholder.Value.GetComponentInChildren<Text>().text;
-                    string enemyType = toggle.name;
-                    InstantiateEnemyShell(enemyType, enemyNumber);
-                    Debug.Log("Enemy" + enemyNumber + "is a" + enemyType);
-                }
                 if (toggle.isOn == true && toggle.name == "Elite")
                 {
-                    string enemyNumber = placeholder.Value.GetComponentInChildren<Text>().text;
-                    string enemyType = toggle.name;
-                    InstantiateEnemyShell(enemyType, enemyNumber);
-                    Debug.Log("Enemy" + enemyNumber + "is a" + enemyType);
+                    gameObject.transform.parent.GetChild(0).transform.GetChild(6).transform.GetChild(0).transform.GetChild(i).transform.gameObject.SetActive(true);
+                    gameObject.transform.parent.GetChild(0).transform.GetChild(6).transform.GetChild(0).transform.GetChild(i).GetComponentInChildren<Text>().text = gameObject.transform.GetChild(i).GetComponentInChildren<Text>().text;
+                    break;
                 }
 
-
+                if (toggle.isOn == true && toggle.name == "Normal")
+                {
+                    gameObject.transform.parent.GetChild(0).transform.GetChild(6).transform.GetChild(1).transform.GetChild(i).transform.gameObject.SetActive(true);
+                    gameObject.transform.parent.GetChild(0).transform.GetChild(6).transform.GetChild(1).transform.GetChild(i).GetComponentInChildren<Text>().text = gameObject.transform.GetChild(i).GetComponentInChildren<Text>().text;
+                    break;
+                }
+                else
+                {
+                    if (toggle.isOn == false && gameObject.transform.parent.GetChild(0).transform.GetChild(6).transform.GetChild(0).transform.GetChild(i).transform.gameObject.activeSelf == true)
+                    {
+                        gameObject.transform.parent.GetChild(0).transform.GetChild(6).transform.GetChild(0).transform.GetChild(i).transform.gameObject.SetActive(false);
+                    }
+                    if (toggle.isOn == false && gameObject.transform.parent.GetChild(0).transform.GetChild(6).transform.GetChild(1).transform.GetChild(i).transform.gameObject.activeSelf == true)
+                    {
+                        gameObject.transform.parent.GetChild(0).transform.GetChild(6).transform.GetChild(1).transform.GetChild(i).transform.gameObject.SetActive(false);
+                    }
+                }
             }
-
         }
-    }
-
-    public void InstantiateEnemyShell(string enemytype, string enemynumber)
-    {
-        if (enemytype == "Normal")
-        {
-            Instantiate(enemyShell, gameObject.transform.parent.GetChild(0).GetChild(6).GetChild(0));
-            enemyShell.GetComponentInChildren<Text>().text = enemynumber; // THIS DOES NOT WORK. DO THIS IN INDIVIDUAL INSTANTIATIONS (SCRIPT) OF THE ENEMYSHELLS
-        }
-        if (enemytype == "Elite")
-        {
-            Instantiate(enemyShell, gameObject.transform.parent.GetChild(0).GetChild(6).GetChild(1));
-            enemyShell.GetComponentInChildren<Text>().text = enemynumber; // THIS DOES NOT WORK. DO THIS IN INDIVIDUAL INSTANTIATIONS (SCRIPT) OF THE ENEMYSHELLS
-        }
+        transform.parent.GetChild(0).transform.gameObject.SetActive(true);
+        transform.gameObject.SetActive(false);
     }
 }
