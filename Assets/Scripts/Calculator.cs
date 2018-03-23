@@ -6,37 +6,29 @@ using UnityEngine.EventSystems;
 
 public class Calculator : MonoBehaviour
 {
-
-
     [SerializeField]
     Text inputField;
-
-    string inputString;
 
     public void ButtonPressed()
     {
         string buttonValue = EventSystem.current.currentSelectedGameObject.name;
 
-        inputString += buttonValue;
-
-        inputField.text = inputString;
+        inputField.text += buttonValue;
     }
 
     public void BackSpacePressed()
     {
-        if (inputString.Length > 0)
+        if (inputField.text.Length > 0)
         {
-            inputString = inputString.Substring(0, inputString.Length - 1);
-            inputField.text = inputString;
+            inputField.text = inputField.text.Substring(0, inputField.text.Length - 1);
         }
     }
 
     public void ClearPressed()
     {
-        if (inputString.Length > 0)
+        if (inputField.text.Length > 0)
         {
-            inputString = inputString.Substring(0,0);
-            inputField.text = inputString;
+            inputField.text = inputField.text.Substring(0,0);
         }
     }
 }
