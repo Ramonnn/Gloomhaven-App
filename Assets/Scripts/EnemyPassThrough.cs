@@ -10,8 +10,25 @@ public class EnemyPassThrough : MonoBehaviour
     private string refreshHealth;
     private bool enemyDead;
 
-    public EliteHandler eliteHandler; //These scripts can be removed!
-    public NormalHandler normalHandler; // These scripts can be removed! Just use public GameObject EnemyFrame to get access to LoadMonsterData and load maxHealth from there. Also do this for the getchildgetchildgetchild bullshit.
+    private List<GameObject> normalEnemies = new List<GameObject>();
+    private List<GameObject> eliteEnemies = new List<GameObject>();
+
+    private LoadMonsterData monsterData;
+
+    private void Start()
+    {
+        monsterData = GetComponentInParent<LoadMonsterData>();
+
+        foreach (Transform enemy in gameObject.transform.parent.GetChild(0).transform.GetChild(6).transform.GetChild(1))
+        {
+            normalEnemies.Add(enemy.gameObject);
+        }
+
+        foreach (Transform enemy in gameObject.transform.parent.GetChild(0).transform.GetChild(6).transform.GetChild(0))
+        {
+            eliteEnemies.Add(enemy.gameObject);
+        }
+    }
 
     public void FetchPlaceHolders() //On Button Press... Maybe could already do this on scene instantiation? Don't know what is more efficient.
     {
@@ -25,54 +42,52 @@ public class EnemyPassThrough : MonoBehaviour
             }
         }
 
+
         for (int i = 0; i < gameObject.transform.childCount - 1; i++)
         {
             foreach (Toggle toggle in gameObject.transform.GetChild(i).GetComponentsInChildren<Toggle>())
             {
-                if (toggle.isOn && gameObject.transform.parent.GetChild(0).transform.GetChild(6).transform.GetChild(0).transform.GetChild(i).transform.gameObject.activeSelf == false && gameObject.transform.parent.GetChild(0).transform.GetChild(6).transform.GetChild(1).transform.GetChild(i).transform.gameObject.activeSelf == false)
+                if (toggle.isOn && normalEnemies[i].transform.gameObject.activeSelf == false && eliteEnemies[i].transform.gameObject.activeSelf == false)
                 {
-                    gameObject.transform.GetChild(i).GetComponentInChildren<Toggle>().isOn = false;
+                    gameObject.transform.GetChild(i).transform.GetChild(2).GetComponent<Toggle>().isOn = false;
+                    gameObject.transform.GetChild(i).transform.GetChild(3).GetComponent<Toggle>().isOn = false;
                 }
             }
         }
+
+
         transform.parent.GetChild(0).transform.gameObject.SetActive(false);
         transform.gameObject.SetActive(true);
     }
 
 
-    public void ClosePopUp() // ToggleGroup itteration doesn't work for some reason. Now I need to add breaks in order for the else statement not to run at unwanted moments... Least elegant code ever.
+    public void ClosePopUp() //Wish this worked with togglegroup...
     {
         for (int i = 0; i < gameObject.transform.childCount - 1; i++)
         {
             foreach (Toggle toggle in gameObject.transform.GetChild(i).GetComponentsInChildren<Toggle>())
             {
-                if (toggle.isOn == true && toggle.name == "Elite" && gameObject.transform.parent.GetChild(0).transform.GetChild(6).transform.GetChild(0).transform.GetChild(i).transform.gameObject.activeSelf == false)
+                if (toggle.isOn == true && toggle.name == "Elite" && eliteEnemies[i].activeSelf == false)
                 {
-                    gameObject.transform.parent.GetChild(0).transform.GetChild(6).transform.GetChild(0).transform.GetChild(i).transform.GetChild(1).GetComponent<Text>().text = eliteHandler.maxHealth + "/" + eliteHandler.maxHealth;
-                    gameObject.transform.parent.GetChild(0).transform.GetChild(6).transform.GetChild(0).transform.GetChild(i).transform.gameObject.SetActive(true);
-                    gameObject.transform.parent.GetChild(0).transform.GetChild(6).transform.GetChild(0).transform.GetChild(i).GetComponentInChildren<Text>().text = gameObject.transform.GetChild(i).GetComponentInChildren<Text>().text;
-                    break;
+                    eliteEnemies[i].transform.GetChild(1).GetComponent<Text>().text = monsterData.genericStatsElite[0] + "/" + monsterData.genericStatsElite[0];
+                    eliteEnemies[i].transform.gameObject.SetActive(true);
+                    eliteEnemies[i].transform.GetChild(0).GetComponent<Text>().text = gameObject.transform.GetChild(i).GetComponentInChildren<Text>().text;
                 }
 
-                if (toggle.isOn == true && toggle.name == "Normal" && gameObject.transform.parent.GetChild(0).transform.GetChild(6).transform.GetChild(1).transform.GetChild(i).transform.gameObject.activeSelf == false)
+                else if (toggle.isOn == true && toggle.name == "Normal" && normalEnemies[i].activeSelf == false)
                 {
-                    gameObject.transform.parent.GetChild(0).transform.GetChild(6).transform.GetChild(1).transform.GetChild(i).transform.GetChild(1).GetComponent<Text>().text = normalHandler.maxHealth + "/" + normalHandler.maxHealth;
-                    gameObject.transform.parent.GetChild(0).transform.GetChild(6).transform.GetChild(1).transform.GetChild(i).transform.gameObject.SetActive(true);
-                    gameObject.transform.parent.GetChild(0).transform.GetChild(6).transform.GetChild(1).transform.GetChild(i).GetComponentInChildren<Text>().text = gameObject.transform.GetChild(i).GetComponentInChildren<Text>().text;
-
-
-                    break;
+                    normalEnemies[i].transform.GetChild(1).GetComponent<Text>().text = monsterData.genericStatsNormal[0] + "/" + monsterData.genericStatsNormal[0];
+                    normalEnemies[i].transform.gameObject.SetActive(true);
+                    normalEnemies[i].transform.GetChild(0).GetComponent<Text>().text = gameObject.transform.GetChild(i).GetComponentInChildren<Text>().text;
                 }
-                else
+                else if (toggle.isOn == false && toggle.name == "Elite" && eliteEnemies[i].transform.gameObject.activeSelf == true)
                 {
-                    if (toggle.isOn == false && gameObject.transform.parent.GetChild(0).transform.GetChild(6).transform.GetChild(0).transform.GetChild(i).transform.gameObject.activeSelf == true)
-                    {
-                        gameObject.transform.parent.GetChild(0).transform.GetChild(6).transform.GetChild(0).transform.GetChild(i).transform.gameObject.SetActive(false);
-                    }
-                    if (toggle.isOn == false && gameObject.transform.parent.GetChild(0).transform.GetChild(6).transform.GetChild(1).transform.GetChild(i).transform.gameObject.activeSelf == true)
-                    {
-                        gameObject.transform.parent.GetChild(0).transform.GetChild(6).transform.GetChild(1).transform.GetChild(i).transform.gameObject.SetActive(false);
-                    }
+                    eliteEnemies[i].transform.gameObject.SetActive(false);
+                }
+
+                else if (toggle.isOn == false && toggle.name == "Normal" && normalEnemies[i].transform.gameObject.activeSelf == true)
+                {
+                    normalEnemies[i].transform.gameObject.SetActive(false);
                 }
             }
         }

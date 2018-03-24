@@ -9,9 +9,14 @@ public class ActivateCalcPop : MonoBehaviour
 {
     private string enemyClicked, enemyClickedType;
     private GameObject clickedEnemy;
-    public NormalHandler normalHandler;
-    public EliteHandler eliteHandler;
     public int maxHealth;
+
+    private LoadMonsterData monsterData;
+
+    private void Start()
+    {
+        monsterData = GetComponentInParent<LoadMonsterData>();
+    }
 
     public void OpenCalcPop()
     {
@@ -32,11 +37,11 @@ public class ActivateCalcPop : MonoBehaviour
     {
         if (enemytype == "Elite")
         {
-            int.TryParse(eliteHandler.maxHealth, out maxHealth);
+            int.TryParse(monsterData.genericStatsElite[0], out maxHealth);
         }
         else if (enemytype == "Normal")
         {
-            int.TryParse(normalHandler.maxHealth, out maxHealth);
+            int.TryParse(monsterData.genericStatsNormal[0], out maxHealth);
         }
 
         int howManyDigits = clickedEnemy.transform.GetChild(1).GetComponent<Text>().text.IndexOf("/");
