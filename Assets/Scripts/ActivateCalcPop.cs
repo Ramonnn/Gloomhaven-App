@@ -13,24 +13,50 @@ public class ActivateCalcPop : MonoBehaviour
 
     private LoadMonsterData monsterData;
 
+    private List<GameObject> calcConditions = new List<GameObject>();
+
     private void Start()
     {
         monsterData = GetComponentInParent<LoadMonsterData>();
+        foreach (Transform condition in gameObject.transform.GetChild(2))
+        {
+            calcConditions.Add(condition.gameObject);
+        }
     }
 
     public void OpenCalcPop()
     {
-        gameObject.transform.GetChild(0).GetComponentInChildren<Text>().text = null;
-        gameObject.SetActive(true);
         enemyClicked = EventSystem.current.currentSelectedGameObject.name; // Maybe I can merge this and type to EventSystem.currenc.curentSelectedGameObject(.gameObject)
         enemyClickedType = EventSystem.current.currentSelectedGameObject.transform.parent.name;
         clickedEnemy = EventSystem.current.currentSelectedGameObject; //this is what I mean...
+
+
+        for (int i = 0; i < calcConditions.Count; i++)
+        {
+            if (calcConditions[i].GetComponent<Toggle>().isOn)
+            {
+                calcConditions[i].GetComponent<Toggle>().isOn = false;
+            }
+            if (clickedEnemy.transform.GetChild(2).transform.GetChild(i).transform.gameObject.activeSelf)
+            {
+                calcConditions[i].transform.GetChild(0).transform.gameObject.SetActive(true);
+            }
+            if (clickedEnemy.transform.GetChild(2).transform.GetChild(i).transform.gameObject.activeSelf == false)
+            {
+                calcConditions[i].transform.GetChild(0).transform.gameObject.SetActive(false);
+            }
+
+        }
+
+        gameObject.transform.GetChild(0).GetComponentInChildren<Text>().text = "";
+        gameObject.SetActive(true);
     }
 
     public void CloseCalcPop()
     {
         gameObject.SetActive(false);
         CalculateDMG(enemyClickedType);
+        Debug.Log(clickedEnemy);
     }
 
     private void CalculateDMG(string enemytype)
@@ -57,16 +83,13 @@ public class ActivateCalcPop : MonoBehaviour
         }
         else
         {
-            if (clickedEnemy.transform.GetChild(3).transform.GetChild(1).transform.gameObject.activeSelf) //Poisoned
-            {
-                damageAmount =+ 1;
-            }
-            else
-            {
-                int newHealth = remainingHealth - damageAmount;
-                clickedEnemy.transform.GetChild(1).GetComponent<Text>().text = Regex.Replace(clickedEnemy.transform.GetChild(1).GetComponent<Text>().text, "\\d+\\/\\d+", maxHealth.ToString() + "/" + newHealth.ToString());
-            }
-            
+            //if (gameObject.transform.GetChild(0).GetComponentInChildren<Text>().text != "" && clickedEnemy.transform.GetChild(3).transform.GetChild(1).transform.gameObject.activeSelf) //Poisoned
+            //{
+            //    damageAmount = damageAmount + 1;
+            //}
+            int newHealth = remainingHealth - damageAmount;
+            clickedEnemy.transform.GetChild(1).GetComponent<Text>().text = Regex.Replace(clickedEnemy.transform.GetChild(1).GetComponent<Text>().text, "\\d+\\/\\d+", maxHealth.ToString() + "/" + newHealth.ToString());
+
         }
 
         ApplyCondition();
@@ -99,15 +122,32 @@ public class ActivateCalcPop : MonoBehaviour
 
     private void ApplyCondition()
     {
-        for (int x = 0; x < gameObject.transform.GetChild(2).childCount; x++)
+        for (int x = 0; x < calcConditions.Count; x++)
         {
-            if (gameObject.transform.GetChild(2).transform.GetChild(x).GetComponent<Toggle>().isOn)
+            if (calcConditions[x].GetComponent<Toggle>().isOn)
             {
-                for (int i = 0; i < clickedEnemy.transform.GetChild(3).childCount; i++)
+                for (int i = 0; i < clickedEnemy.transform.GetChild(2).childCount; i++)
                 {
-                    if (clickedEnemy.transform.GetChild(3).transform.GetChild(i).name == gameObject.transform.GetChild(2).transform.GetChild(x).name)
+                    if (clickedEnemy.transform.GetChild(2).transform.GetChild(i).name == calcConditions[x].name)
                     {
-                        clickedEnemy.transform.GetChild(3).transform.GetChild(i).transform.gameObject.SetActive(true);
+                        clickedEnemy.transform.GetChild(2).transform.GetChild(i).transform.gameObject.SetActive(true);
+                    }
+                }
+            }
+        }
+    }
+
+    private void RemoveCondition() //to do
+    {
+        for (int x = 0; x < calcConditions.Count; x++)
+        {
+            if (calcConditions[x].GetComponent<Toggle>().isOn)
+            {
+                for (int i = 0; i < clickedEnemy.transform.GetChild(2).childCount; i++)
+                {
+                    if (clickedEnemy.transform.GetChild(2).transform.GetChild(i).name == calcConditions[x].name)
+                    {
+                        clickedEnemy.transform.GetChild(2).transform.GetChild(i).transform.gameObject.SetActive(true);
                     }
                 }
             }
