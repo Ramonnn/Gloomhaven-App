@@ -7,9 +7,10 @@ using System.Text.RegularExpressions;
 
 public class ActivateCalcPop : MonoBehaviour
 {
-    private string enemyClicked, enemyClickedType;
+    private string enemyClickedType;
     private GameObject clickedEnemy;
     public int maxHealth;
+    private int newHealth;
 
     private LoadMonsterData monsterData;
 
@@ -26,7 +27,7 @@ public class ActivateCalcPop : MonoBehaviour
 
     public void OpenCalcPop()
     {
-        enemyClicked = EventSystem.current.currentSelectedGameObject.name; // Maybe I can merge this and type to EventSystem.currenc.curentSelectedGameObject(.gameObject)
+        // Maybe I can merge this and type to EventSystem.currenc.curentSelectedGameObject(.gameObject)
         enemyClickedType = EventSystem.current.currentSelectedGameObject.transform.parent.name;
         clickedEnemy = EventSystem.current.currentSelectedGameObject; //this is what I mean...
 
@@ -73,24 +74,40 @@ public class ActivateCalcPop : MonoBehaviour
         int howManyDigits = clickedEnemy.transform.GetChild(1).GetComponent<Text>().text.IndexOf("/");
         int remainingHealth;
         int.TryParse(clickedEnemy.transform.GetChild(1).GetComponent<Text>().text.Substring(howManyDigits + 1, clickedEnemy.transform.GetChild(1).GetComponent<Text>().text.Length - 1 - howManyDigits), out remainingHealth);
-
         int damageAmount;
         int.TryParse(gameObject.transform.GetChild(0).GetComponentInChildren<Text>().text, out damageAmount);
 
-        if (damageAmount >= remainingHealth)
+        if (gameObject.transform.GetChild(1).transform.GetChild(10).GetComponent<Toggle>().isOn)
         {
-            clickedEnemy.SetActive(false);
+            if (damageAmount >= remainingHealth)
+            {
+                clickedEnemy.SetActive(false);
+            }
+            else
+            {
+                //if (gameObject.transform.GetChild(0).GetComponentInChildren<Text>().text != "" && clickedEnemy.transform.GetChild(3).transform.GetChild(1).transform.gameObject.activeSelf) //Poisoned
+                //{
+                //    damageAmount = damageAmount + 1;
+                //}
+                newHealth = remainingHealth - damageAmount;
+                clickedEnemy.transform.GetChild(1).GetComponent<Text>().text = Regex.Replace(clickedEnemy.transform.GetChild(1).GetComponent<Text>().text, "\\d+\\/\\d+", maxHealth.ToString() + "/" + newHealth.ToString());
+
+            }
+
         }
         else
         {
-            //if (gameObject.transform.GetChild(0).GetComponentInChildren<Text>().text != "" && clickedEnemy.transform.GetChild(3).transform.GetChild(1).transform.gameObject.activeSelf) //Poisoned
-            //{
-            //    damageAmount = damageAmount + 1;
-            //}
-            int newHealth = remainingHealth - damageAmount;
+            if (damageAmount + remainingHealth >= maxHealth)
+            {
+                newHealth = maxHealth;
+            }
+            else
+            {
+                newHealth = remainingHealth + damageAmount;
+            }
             clickedEnemy.transform.GetChild(1).GetComponent<Text>().text = Regex.Replace(clickedEnemy.transform.GetChild(1).GetComponent<Text>().text, "\\d+\\/\\d+", maxHealth.ToString() + "/" + newHealth.ToString());
-
         }
+
 
         ApplyCondition();
 
