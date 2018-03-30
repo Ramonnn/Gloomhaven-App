@@ -16,6 +16,8 @@ public class ActivateCalcPop : MonoBehaviour
 
     private List<GameObject> calcConditions = new List<GameObject>();
 
+    public EnemyHandler enemyHandler;
+
     private void Start()
     {
         monsterData = GetComponentInParent<LoadMonsterData>();
@@ -58,6 +60,14 @@ public class ActivateCalcPop : MonoBehaviour
         gameObject.SetActive(false);
         CalculateDMG(enemyClickedType);
         Debug.Log(clickedEnemy);
+
+        for (int i = 0; i < enemyHandler.allActiveElites.Count; i++)
+        {
+            if (enemyHandler.allActiveElites[i].activeSelf == false)
+            {
+                enemyHandler.allActiveElites.RemoveAt(i);
+            }
+        }
     }
 
     private void CalculateDMG(string enemytype)

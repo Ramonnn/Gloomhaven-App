@@ -41,6 +41,13 @@ public class EnemyHandler : MonoBehaviour
 
     public void FocusEnemy()
     {
+        for (int i = 0; i < allActiveElites.Count; i++)
+        {
+            if (allActiveElites[i].activeSelf == false)
+            {
+                allActiveElites.RemoveAt(i);
+            }
+        }
         if (adaptionChecker == true)
         {
             adaptionChecker = false;
@@ -74,7 +81,7 @@ public class EnemyHandler : MonoBehaviour
             if (allActiveUpdateNormals.Count == 0)
             {
                 gameObject.GetComponent<ToggleGroup>().SetAllTogglesOff();
-                gameObject.transform.parent.GetChild(8).transform.GetComponent<Button>().interactable = false;
+                gameObject.transform.parent.GetChild(7).transform.GetComponent<Button>().interactable = false;
             }
             else
             {
@@ -90,5 +97,7 @@ public class EnemyHandler : MonoBehaviour
             allActiveUpdateElites.RemoveAt(0);
         }
     }
+
+
 
 }
