@@ -16,7 +16,6 @@ public class ElementsTracker : MonoBehaviour
         foreach (Transform element in gameObject.transform.GetChild(0))
         {
             elementsTracker.Add(element.gameObject);
-            Debug.Log(elementsTracker.Count);
         }
     }
 

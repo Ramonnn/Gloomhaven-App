@@ -13,19 +13,34 @@ public class ModifierDrawCard : MonoBehaviour
     private ModifierCard currentCard;
     public bool sendShuffleMessage, drawTwo;
     private int topDeck;
+    private Text monsterM;
 
     void Start()
     {
         standardModifierDeck = GetComponent<ModifierDeck>().standardModifierDeck;
         modifier = gameObject.transform.parent.transform.GetChild(1).transform.GetChild(0).transform.GetComponent<Image>();
         shuffleIcon = gameObject.transform.parent.transform.GetChild(1).transform.GetChild(1).transform.GetComponent<Image>();
+        monsterM = gameObject.transform.parent.transform.GetChild(1).transform.GetChild(2).transform.GetComponent<Text>();
     }
 
-    public void OnMouseDown()
+    public IEnumerator Wait()
     {
+        yield return new WaitForSeconds(0.5f);
+        DrawModifier();
+    }
+
+    public void TestDraw()
+    {
+        modifier.sprite = gameObject.GetComponent<Image>().sprite;
+        monsterM.enabled = false;
         disAdvantage.SetActive(false);
         disAdvantage.transform.GetChild(1).transform.gameObject.GetComponent<Image>().enabled = false;
         shuffleIcon.enabled = false;
+        StartCoroutine(Wait());
+    }
+
+    public void DrawModifier()
+    {
 
 
         topDeck = Random.Range(0, standardModifierDeck.Count);
@@ -38,7 +53,7 @@ public class ModifierDrawCard : MonoBehaviour
                 modifier.sprite = modifierImages[i];
             }
         }
-
+        monsterM.enabled = true;
         standardModifierDeck.RemoveAt(topDeck);
         Debug.Log("Deck contains " + standardModifierDeck.Count + " Cards");
         discardPile.Add(currentCard);
@@ -56,6 +71,7 @@ public class ModifierDrawCard : MonoBehaviour
 
         if (drawTwo == true) //advantage / disadvantage !! Use drawTwo on Strengthend, Muddled!
         {
+            drawTwo = false;
             disAdvantage.SetActive(true);
             topDeck = Random.Range(0, standardModifierDeck.Count);
             currentCard = standardModifierDeck[topDeck];

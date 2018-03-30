@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using System.IO;
 using SimpleJSON;
-
+using System.Collections;
 
 public class DrawCard : MonoBehaviour //Script Execution Order Adjusted +100 from default
 {
@@ -18,6 +18,8 @@ public class DrawCard : MonoBehaviour //Script Execution Order Adjusted +100 fro
 
     private string decksFileName = "decks.json";
     public DecksList loadedDecks;
+
+    public int intInitiative;
 
     private void Start()
     {
@@ -68,42 +70,40 @@ public class DrawCard : MonoBehaviour //Script Execution Order Adjusted +100 fro
         }
     }
 
+    public void RefreshDeck()
+    {
+        shuffleIcon.enabled = false;
+        cardArt.sprite = cardBack;
+        initiative.text = null;
+        monsterName.text = null;
+        line1.text = null;
+    }
+
     public void DrawACard()
     {
+        int topDeck = Random.Range(0, cardDeck.Count);
+        currentCard = cardDeck[topDeck];
+        cardArt.sprite = cardFront;
 
-        if (cardArt.sprite.Equals(cardBack))
+        monsterName.text = gameObject.name;
+        initiative.text = currentCard.initiative;
+        int.TryParse(currentCard.initiative, out intInitiative);
+        for (int i = 0; i < currentCard.cardlines.Count; i++)
         {
-            int topDeck = Random.Range(0, cardDeck.Count);
-            currentCard = cardDeck[topDeck];
-            cardArt.sprite = cardFront;
-
-            monsterName.text = gameObject.name;
-            initiative.text = currentCard.initiative;
-            for (int i = 0; i < currentCard.cardlines.Count; i++)
-            {
-                line1.text = line1.text + currentCard.cardlines[i] + "\n";
-            }
-
-            cardDeck.RemoveAt(topDeck);
-            Debug.Log("Deck contains " + cardDeck.Count + " Cards");
-            discardPile.Add(currentCard);
-
-            if (currentCard.shuffle)
-            {
-                shuffleIcon.enabled = true;
-                Shuffle();
-            }
+            line1.text = line1.text + currentCard.cardlines[i] + "\n";
         }
-        else
-        {
-            shuffleIcon.enabled = false;
-            cardArt.sprite = cardBack;
-            initiative.text = null;
-            monsterName.text = null;
-            line1.text = null;
 
+        cardDeck.RemoveAt(topDeck);
+        Debug.Log("Deck contains " + cardDeck.Count + " Cards");
+        discardPile.Add(currentCard);
+
+        if (currentCard.shuffle)
+        {
+            shuffleIcon.enabled = true;
+            Shuffle();
         }
     }
+
 
     void Shuffle()
     {
