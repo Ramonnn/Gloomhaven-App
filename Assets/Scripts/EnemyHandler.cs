@@ -17,6 +17,27 @@ public class EnemyHandler : MonoBehaviour
 
     private bool adaptionChecker;
 
+    public delegate void ClickAction();
+    public static event ClickAction OnClicked;
+
+    public void ClickerTester()
+    {
+        if (OnClicked != null)
+        {
+            OnClicked();
+        }
+    }
+
+    void OnEnable()
+    {
+        OnClicked += FocusEnemy;
+    }
+
+    void OnDisable()
+    {
+        OnClicked -= FocusEnemy;
+    }
+
     public void AddToActivePool()
     {
         allActiveElites.Clear();

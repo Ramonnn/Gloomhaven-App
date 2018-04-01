@@ -17,7 +17,55 @@
 			"monsterclass": "Imp"
 		},
 		{
-			"name": "Boss",
+			"name": "Bandit Commander",
+			"monsterclass": "Boss"
+		},
+		{
+			"name": "The Betrayer",
+			"monsterclass": "Boss"
+		},
+		{
+			"name": "Captain of the Guard",
+			"monsterclass": "Boss"
+		},
+		{
+			"name": "The Colorless",
+			"monsterclass": "Boss"
+		},
+		{
+			"name": "Dark Rider",
+			"monsterclass": "Boss"
+		},
+		{
+			"name": "Elder Drake",
+			"monsterclass": "Boss"
+		},
+		{
+			"name": "The Gloom",
+			"monsterclass": "Boss"
+		},
+		{
+			"name": "Inox Bodyguard",
+			"monsterclass": "Boss"
+		},
+		{
+			"name": "Jekserah",
+			"monsterclass": "Boss"
+		},
+		{
+			"name": "Merciless Overseer",
+			"monsterclass": "Boss"
+		},
+		{
+			"name": "Prime Demon",
+			"monsterclass": "Boss"
+		},
+		{
+			"name": "The Sightless Eye",
+			"monsterclass": "Boss"
+		},
+		{
+			"name": "Winged Horror",
 			"monsterclass": "Boss"
 		},
 		{

@@ -5,6 +5,28 @@ using UnityEngine.UI;
 
 public class RoundTracker : MonoBehaviour {
 
+
+    public delegate void RoundProperties();
+    public static event RoundProperties TrackingRound;
+
+    public void RoundTrackerClick()
+    {
+        if (TrackingRound != null)
+        {
+            TrackingRound();
+        }
+    }
+
+    void OnEnable()
+    {
+        TrackingRound += UpdateRoundNumber;
+    }
+
+    void OnDisable()
+    {
+        TrackingRound -= UpdateRoundNumber;
+    }
+
     private int roundNumber;
 	// Use this for initialization
 	void Start () {

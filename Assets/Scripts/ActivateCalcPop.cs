@@ -163,21 +163,4 @@ public class ActivateCalcPop : MonoBehaviour
             }
         }
     }
-
-    private void RemoveCondition() //to do
-    {
-        for (int x = 0; x < calcConditions.Count; x++)
-        {
-            if (calcConditions[x].GetComponent<Toggle>().isOn)
-            {
-                for (int i = 0; i < clickedEnemy.transform.GetChild(2).childCount; i++)
-                {
-                    if (clickedEnemy.transform.GetChild(2).transform.GetChild(i).name == calcConditions[x].name)
-                    {
-                        clickedEnemy.transform.GetChild(2).transform.GetChild(i).transform.gameObject.SetActive(true);
-                    }
-                }
-            }
-        }
-    }
 }

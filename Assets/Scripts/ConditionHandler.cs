@@ -19,6 +19,16 @@ public class ConditionHandler : MonoBehaviour
         monsterData = gameObject.transform.parent.transform.parent.GetComponentInParent<LoadMonsterData>();
     }
 
+    void OnEnable()
+    {
+        EnemyHandler.OnClicked += ConditionUpdate;
+    }
+
+    void OnDisable()
+    {
+        EnemyHandler.OnClicked -= ConditionUpdate;
+    }
+
     public void ConditionUpdate()
     {
         if (gameObject.transform.GetChild(4).GetComponent<Toggle>().isOn == true)

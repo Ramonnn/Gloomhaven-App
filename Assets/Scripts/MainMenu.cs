@@ -10,7 +10,8 @@ public class MainMenu : MonoBehaviour
     public void SubmitSettings()
     {
         chosenScenario = GameObject.Find("Scenario").GetComponentInChildren<Text>().text;
-
+        numberOfPlayers = 4;
+        scenarioLevel = 1;
         PlayerPrefs.SetString("ChosenScenario", chosenScenario);
         PlayerPrefs.SetInt("NumberOfPlayers", numberOfPlayers);
         PlayerPrefs.SetInt("ScenarioLevel", scenarioLevel);

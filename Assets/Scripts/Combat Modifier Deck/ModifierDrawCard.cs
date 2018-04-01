@@ -102,6 +102,16 @@ public class ModifierDrawCard : MonoBehaviour
 
     }
 
+    void OnEnable()
+    {
+        RoundTracker.TrackingRound += Shuffle;
+    }
+
+    void OnDisable()
+    {
+        RoundTracker.TrackingRound -= Shuffle;
+    }
+
     public void Shuffle()
     {
         if (sendShuffleMessage)

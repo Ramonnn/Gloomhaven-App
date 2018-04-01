@@ -21,11 +21,6 @@ public class LoadScenario : MonoBehaviour //Script Execution Order Adjusted -100
         LoadCombinations();
     }
 
-    void Start()
-    {
-
-    }
-
     private void LoadScenarioData(string selectedscenario)
     {
         string filePath = Path.Combine(Application.streamingAssetsPath, scenariosFileName);

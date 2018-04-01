@@ -11,6 +11,16 @@ public class ElementsTracker : MonoBehaviour
     private GameObject clickedElement;
     public GameObject roundButton;
 
+    void OnEnable()
+    {
+        RoundTracker.TrackingRound += UpdateElements;
+    }
+
+    void OnDisable()
+    {
+        RoundTracker.TrackingRound -= UpdateElements;
+    }
+
     void Start()
     {
         foreach (Transform element in gameObject.transform.GetChild(0))

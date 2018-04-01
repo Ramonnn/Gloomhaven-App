@@ -7,6 +7,16 @@ public class AbilityCardDealButton : MonoBehaviour {
     private List<DrawCard> abilitycardDecks = new List<DrawCard>();
     public GameObject gridDynamic;
 
+    void OnEnable()
+    {
+        RoundTracker.TrackingRound += ReEnableCardDealButton;
+    }
+
+    void OnDestroy() //Because this button does get disabled and gets enabled by the same event. (which it won't listen to anymore if disabled).
+    {
+        RoundTracker.TrackingRound -= ReEnableCardDealButton;
+    }
+
     public void DealCards()
     {
         abilitycardDecks.Clear();
