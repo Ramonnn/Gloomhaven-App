@@ -13,14 +13,19 @@ public class TestLoadMonsterData : MonoBehaviour
     public Monsters loadedMonsters;
     public ElitesAndNormals elitesAndNormals;
     private List<string> scenarioMonsters;
-    private List<TestDeck> currentMonsterDeck;
-    private TestDeck currentCard;
+
+    public TestDeck currentCard;
+    public TestCurrentMonsters Normals;
+    public TestCurrentMonsters Elites;
+    public TestCurrentBosses Bosses;
+    public List<TestDeck> currentMonsterDeck;
+
 
     public Dictionary<string, ElitesAndNormals> currentMonsters = new Dictionary<string, ElitesAndNormals>(); // Dicts with all currentScenario Enemy Info.
     public Dictionary<string, TestCurrentBosses> currentBosses = new Dictionary<string, TestCurrentBosses>(); // Dicts with all currentScenario Enemy Info.
 
     public Sprite[] monsterImages;
-    public Sprite currentMonsterImage;
+    private Sprite currentMonsterImage;
 
     private List<string> normalAttri;
     private List<string> eliteAttri;
@@ -52,10 +57,22 @@ public class TestLoadMonsterData : MonoBehaviour
         LoadJSONFiles();
     }
 
+    public delegate void SceneListener();
+    public static event SceneListener UpdateScene;
+
+    public void SceneUpdater() // execute this method to updatescene (so whenever anything changes in the scene).
+    {
+        if (UpdateScene != null)
+        {
+            UpdateScene();
+        }
+    }
+
     void Start()
     {
         scenarioMonsters = GetComponent<TestLoadScenario>().scenarioMonsters;
         LoadCombinations(scenarioMonsters);
+        SceneUpdater();
     }
 
     void LoadJSONFiles()
@@ -125,18 +142,23 @@ public class TestLoadMonsterData : MonoBehaviour
         {
             if (monsterdeck["monsterclass"] == monsterclass)
             {
-                cardLines = new List<string>();
                 currentMonsterDeck = new List<TestDeck>();
 
                 for (int i = 0; i < monsterdeck["cards"].Count; i++)
                 {
+                    cardLines = new List<string>();
                     for (int x = 0; x < monsterdeck["cards"][i]["cardlines"].Count; x++)
                     {
                         cardLines.Add(monsterdeck["cards"][i]["cardlines"][x]);
                     }
-                    currentCard = new TestDeck(monsterclass,
-                        monsterdeck["cards"][i]["initiative"],
-                        monsterdeck["cards"][i]["shuffle"], cardLines);
+                    currentCard = new TestDeck
+                    {
+                        monsterName = monsterclass,
+                        initiativeValue = monsterdeck["cards"][i]["initiative"],
+                        shuffleBool = monsterdeck["cards"][i]["shuffle"],
+                        modifierLines = cardLines
+                    };
+
 
                     currentMonsterDeck.Add(currentCard);
                 }
@@ -156,29 +178,41 @@ public class TestLoadMonsterData : MonoBehaviour
                 {
                     normalAttri.Add(monster.Value["level"][PlayerPrefs.GetString("ChosenLevel")]["normal"]["attributes"][i]);
                 }
-                TestCurrentMonsters currentNormals = new TestCurrentMonsters(monstername,
-                    currentMonsterImage,
-                    "Normal", PlayerPrefs.GetInt("ChosenLevel"),
-                    monster.Value["level"][PlayerPrefs.GetInt("ChosenLevel")]["normal"]["health"],
-                    monster.Value["level"][PlayerPrefs.GetInt("ChosenLevel")]["normal"]["move"],
-                    monster.Value["level"][PlayerPrefs.GetInt("ChosenLevel")]["normal"]["attack"],
-                    monster.Value["level"][PlayerPrefs.GetInt("ChosenLevel")]["normal"]["range"], normalAttri, currentMonsterDeck);
 
-                elitesAndNormals.currentNormals = currentNormals;
+                Normals = new TestCurrentMonsters
+                {
+                    monsterName = monstername,
+                    monsterImage = currentMonsterImage,
+                    enemyType = "normal",
+                    monsterLevel = PlayerPrefs.GetInt("ChosenLevel"),
+                    monsterHealth = monster.Value["level"][PlayerPrefs.GetInt("ChosenLevel")]["normal"]["health"],
+                    monsterMove = monster.Value["level"][PlayerPrefs.GetInt("ChosenLevel")]["normal"]["move"],
+                    monsterAttack = monster.Value["level"][PlayerPrefs.GetInt("ChosenLevel")]["normal"]["attack"],
+                    monsterRange = monster.Value["level"][PlayerPrefs.GetInt("ChosenLevel")]["normal"]["range"],
+                    attributes = normalAttri,
+                    cardDeck = currentMonsterDeck
+                };
+                elitesAndNormals.currentNormals = Normals;
 
                 for (int i = 0; i < monster.Value["level"][PlayerPrefs.GetString("ChosenLevel")]["elite"]["attributes"].Count; i++)
                 {
                     eliteAttri.Add(monster.Value["level"][PlayerPrefs.GetString("ChosenLevel")]["elite"]["attributes"][i]);
                 }
-                TestCurrentMonsters currentElites = new TestCurrentMonsters(monstername,
-                    currentMonsterImage,
-                    "Elite", PlayerPrefs.GetInt("ChosenLevel"),
-                    monster.Value["level"][PlayerPrefs.GetInt("ChosenLevel")]["elite"]["health"],
-                    monster.Value["level"][PlayerPrefs.GetInt("ChosenLevel")]["elite"]["move"],
-                    monster.Value["level"][PlayerPrefs.GetInt("ChosenLevel")]["elite"]["attack"],
-                    monster.Value["level"][PlayerPrefs.GetInt("ChosenLevel")]["elite"]["range"], eliteAttri, currentMonsterDeck);
+                Elites = new TestCurrentMonsters
+                {
+                    monsterName = monstername,
+                    monsterImage = currentMonsterImage,
+                    enemyType = "elites",
+                    monsterLevel = PlayerPrefs.GetInt("ChosenLevel"),
+                    monsterHealth = monster.Value["level"][PlayerPrefs.GetInt("ChosenLevel")]["elite"]["health"],
+                    monsterMove = monster.Value["level"][PlayerPrefs.GetInt("ChosenLevel")]["elite"]["move"],
+                    monsterAttack = monster.Value["level"][PlayerPrefs.GetInt("ChosenLevel")]["elite"]["attack"],
+                    monsterRange = monster.Value["level"][PlayerPrefs.GetInt("ChosenLevel")]["elite"]["range"],
+                    attributes = eliteAttri,
+                    cardDeck = currentMonsterDeck
+                };
 
-                elitesAndNormals.currentElites = currentElites;
+                elitesAndNormals.currentElites = Elites;
 
                 currentMonsters.Add(monstername, elitesAndNormals);
             }
@@ -189,18 +223,20 @@ public class TestLoadMonsterData : MonoBehaviour
                     if (boss.Key == monstername)
                     {
                         monsterFound = true;
-                        TestCurrentBosses currentBoss = new TestCurrentBosses(monstername,
-                            currentMonsterImage,
-                            PlayerPrefs.GetInt("ChosenLevel"),
-                            boss.Value["level"]["level"][PlayerPrefs.GetString("ChosenLevel")]["health"],
-                            boss.Value["level"][boss.Key]["level"][PlayerPrefs.GetString("ChosenLevel")]["move"],
-                            boss.Value["level"][boss.Key]["level"][PlayerPrefs.GetString("ChosenLevel")]["attack"],
-                            boss.Value["level"][boss.Key]["level"][PlayerPrefs.GetString("ChosenLevel")]["range"],
-                            boss.Value["level"][boss.Key]["level"][PlayerPrefs.GetString("ChosenLevel")]["special1"],
-                            boss.Value["level"][boss.Key]["level"][PlayerPrefs.GetString("ChosenLevel")]["special2"],
-                            boss.Value["level"][boss.Key]["level"][PlayerPrefs.GetString("ChosenLevel")]["notes"], currentMonsterDeck);
+                        Bosses = new TestCurrentBosses
+                        {
+                            monsterName = monstername,
+                            monsterImage = currentMonsterImage,
+                            monsterLevel = PlayerPrefs.GetInt("ChosenLevel"),
+                            monsterHealth = boss.Value["level"][PlayerPrefs.GetInt("ChosenLevel")]["health"],
+                            monsterMove = boss.Value["level"][PlayerPrefs.GetInt("ChosenLevel")]["move"],
+                            monsterAttack = boss.Value["level"][PlayerPrefs.GetInt("ChosenLevel")]["attack"],
+                            monsterRange = boss.Value["level"][PlayerPrefs.GetInt("ChosenLevel")]["range"],
+                            monsterNotes = boss.Value["level"][PlayerPrefs.GetInt("ChosenLevel")]["notes"],
+                            cardDeck = currentMonsterDeck
+                        };
 
-                        currentBosses.Add(monstername, currentBoss);
+                        currentBosses.Add(monstername, Bosses);
                     }
                 }
 

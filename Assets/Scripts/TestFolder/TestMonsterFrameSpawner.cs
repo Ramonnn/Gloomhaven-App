@@ -1,0 +1,50 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class TestMonsterFrameSpawner : MonoBehaviour
+{
+
+    public TestLoadMonsterData monsterData;
+    public List<GameObject> enemyFrames = new List<GameObject>();
+
+    public GameObject genericFrame;
+
+    void OnEnable()
+    {
+        TestLoadMonsterData.UpdateScene += SpawnMonsterFrame;
+    }
+
+    void OnDisable()
+    {
+        TestLoadMonsterData.UpdateScene -= SpawnMonsterFrame;
+    }
+
+    void SpawnMonsterFrame()
+    {
+        foreach (KeyValuePair<string, TestLoadMonsterData.ElitesAndNormals> monster in monsterData.currentMonsters)
+        {
+            Debug.Log("Spawning Deck For " + monster.Key);
+            TestMonsterFrame monsterFrame = genericFrame.GetComponent<TestMonsterFrame>();
+            monsterFrame.monsterName.text = monster.Key;
+            monsterFrame.monsterImage.sprite = monster.Value.currentElites.monsterImage;
+            genericFrame.name = monster.Key;
+
+            monsterFrame.staticElite.GetComponentInChildren<Text>().text = monster.Value.currentElites.monsterHealth + "\n" +
+                monster.Value.currentElites.monsterMove + "\n" + monster.Value.currentElites.monsterAttack + "\n" +
+                monster.Value.currentElites.monsterRange;
+
+            monsterFrame.staticNormal.GetComponentInChildren<Text>().text = monster.Value.currentNormals.monsterHealth + "\n" +
+                monster.Value.currentNormals.monsterMove + "\n" + monster.Value.currentNormals.monsterAttack + "\n" +
+                monster.Value.currentNormals.monsterRange;
+
+            monsterFrame.abilityDeck = new List<TestDeck>(monster.Value.currentNormals.cardDeck);
+
+            Debug.Log(monsterFrame.abilityDeck[0].initiativeValue);
+
+            enemyFrames.Add(Instantiate(genericFrame, gameObject.transform));
+
+        }
+    }
+}
