@@ -29,6 +29,21 @@ public class TestMonsterFrameSpawner : MonoBehaviour
             TestMonsterFrame monsterFrame = genericFrame.GetComponent<TestMonsterFrame>();
             monsterFrame.monsterName.text = monster.Key;
             monsterFrame.monsterImage.sprite = monster.Value.currentElites.monsterImage;
+
+            foreach (GameObject popupmonster in monsterFrame.monsterPopUp.GetComponent<TestAddMonsterPopUp>().popUpMonsters)
+            {
+                popupmonster.GetComponent<Image>().sprite = monster.Value.currentElites.monsterImage;
+            }
+
+            foreach (GameObject elite in monsterFrame.monsterPanel.GetComponent<TestMonsterPanel>().panelMonsters.Elites)
+            {
+                elite.GetComponent<TestMonster>().currentMonster = monster.Value.currentElites;
+            }
+            foreach (GameObject normal in monsterFrame.monsterPanel.GetComponent<TestMonsterPanel>().panelMonsters.Normals)
+            {
+                normal.GetComponent<TestMonster>().currentMonster = monster.Value.currentNormals;
+            }
+
             genericFrame.name = monster.Key;
 
             monsterFrame.staticElite.GetComponentInChildren<Text>().text = monster.Value.currentElites.monsterHealth + "\n" +
@@ -40,8 +55,6 @@ public class TestMonsterFrameSpawner : MonoBehaviour
                 monster.Value.currentNormals.monsterRange;
 
             monsterFrame.abilityDeck = new List<TestDeck>(monster.Value.currentNormals.cardDeck);
-
-            Debug.Log(monsterFrame.abilityDeck[0].initiativeValue);
 
             enemyFrames.Add(Instantiate(genericFrame, gameObject.transform));
 
