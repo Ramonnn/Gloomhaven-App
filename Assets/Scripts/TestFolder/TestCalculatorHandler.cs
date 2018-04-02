@@ -2,15 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestCalculatorHandler : MonoBehaviour {
+public class TestCalculatorHandler : MonoBehaviour
+{
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public void CalculatorPopUp()
+    {
+        if (gameObject.activeSelf)
+        {
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            gameObject.SetActive(true);
+        }
+    }
+
+    //Create Event Listener and subscribe the enemy from enemypanel when (button) clicked on. Unsubscribe after value passthrough and calculator closes.
+
 }
