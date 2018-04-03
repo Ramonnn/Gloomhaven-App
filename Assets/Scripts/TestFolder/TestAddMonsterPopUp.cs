@@ -11,7 +11,6 @@ public class TestAddMonsterPopUp : MonoBehaviour
 
     public void MonsterPopUp()
     {
-        Debug.Log("Click");
         if (addMonsterPopUp.activeSelf)
         {
             addMonsterPopUp.SetActive(false);
@@ -43,4 +42,5 @@ public class TestAddMonsterPopUp : MonoBehaviour
             }
         }
     }
+
 }
