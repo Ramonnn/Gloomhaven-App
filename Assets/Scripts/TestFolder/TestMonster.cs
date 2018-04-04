@@ -9,42 +9,94 @@ public class TestMonster : MonoBehaviour
     public GameObject calculator;
     public Text healthText;
     public List<GameObject> conditions = new List<GameObject>();
+    public List<GameObject> waningConditions = new List<GameObject>();
     public Toggle currentTurn;
     public Image[] shieldValues;
-
+    public int remainingHealth, maxHealth, shield;
+    public bool poisoned, wounded;
 
     private void OnEnable()
     {
-        AssignStartValues();
-        //Event listener can go here (if something applies to all monsters that are active)
+        FreshEnemy();
     }
 
-    private void AssignStartValues()
+    public void PresentAsRelevant()
     {
-        healthText.text = currentMonster.monsterHealth.ToString() + "/" + currentMonster.monsterHealth.ToString();
-        //if monsters starts with anything else than specific health, insert here.
+        calculator.GetComponent<TestCalculatorHandler>().relevantEnemy = gameObject.GetComponent<TestMonster>();
+    }
+
+    public void FreshEnemy()
+    {
+        foreach (GameObject condition in conditions)
+        {
+            if (condition.activeSelf)
+            {
+                condition.SetActive(false);
+            }
+        }
+        maxHealth = currentMonster.monsterHealth;
+        remainingHealth = currentMonster.monsterHealth;
+
+        healthText.text = maxHealth + "/" + maxHealth;
+
+        //Shield Deactivate. Retaliate Deactivate.
     }
 
     public void OpenCalculator()
     {
-        TestCalculatorHandler.PassThroughDamage += HealthHandler;
+        PresentAsRelevant();
         calculator.SetActive(true);
     }
 
-    private void HealthHandler(string damage)
+    public void HealthHandler(int damage)
     {
-        TestCalculatorHandler.PassThroughDamage -= HealthHandler;
         if (calculator.GetComponent<TestCalculatorHandler>().damage.isOn)
         {
-            //parse to int.
+            if (poisoned) { damage = damage + 1; }
+            remainingHealth = remainingHealth - damage + shield;
+            if (remainingHealth <= 0)
+            {
+                gameObject.SetActive(false);
+            }
+            else
+            {
+                healthText.text = remainingHealth + "/" + maxHealth;
+            }
         }
         else if (calculator.GetComponent<TestCalculatorHandler>().heal.isOn)
         {
-            //parse to int.
+            if (poisoned == true || wounded == true)
+            {
+                conditions[0].SetActive(false);
+                conditions[1].SetActive(false);
+                poisoned = false;
+                wounded = false;
+            }
+            else
+            {
+                remainingHealth = remainingHealth + damage;
+                if (remainingHealth > maxHealth)
+                {
+                    remainingHealth = maxHealth;
+                    healthText.text = remainingHealth + "/" + maxHealth;
+                }
+                else
+                {
+                    healthText.text = remainingHealth + "/" + maxHealth;
+                }
+            }
         }
         else
         {
-            //aoe damage.
+            remainingHealth = remainingHealth - damage;
+            if (remainingHealth <= 0)
+            {
+                gameObject.SetActive(false);
+            }
+            else
+            {
+                healthText.text = remainingHealth + "/" + maxHealth;
+            }
         }
 
     }
@@ -53,11 +105,34 @@ public class TestMonster : MonoBehaviour
     {
         if (currentTurn)
         {
-            ConditionHandler();
+            ApplyConditionEffect();
         }
     }
 
-    private void ConditionHandler()
+    private void RemoveCondition()
+    {
+        foreach (GameObject condition in waningConditions)
+        {
+            condition.SetActive(false);
+        }
+        waningConditions.Clear();
+    }
+
+    public void AddCondition(List<GameObject> conds)
+    {
+        foreach (GameObject cond in conds)
+        {
+            foreach (GameObject condition in conditions)
+            {
+                if (condition.name == cond.name)
+                {
+                    condition.SetActive(true);
+                }
+            }
+        }
+    }
+
+    private void ApplyConditionEffect()
     {
         foreach (GameObject condition in conditions)
         {
@@ -66,41 +141,41 @@ public class TestMonster : MonoBehaviour
                 switch (condition.name)
                 {
                     case "Poisoned":
-                        //damageTaken = damageTaken +1;
+                        // See HealthHandler(int damage);
                         break;
                     case "Wounded":
-                        //remainingHealth = remainingHealth -1;
+                        remainingHealth = remainingHealth - 1;
+                        healthText.text = remainingHealth + "/" + maxHealth;
                         break;
                     case "Dazed":
-                        //health = health -1;
-                        //Remove Dazed
+                        //Skip Turn.
+                        waningConditions.Add(condition);
                         break;
                     case "Muddled":
                         //DisAdvantage = true;
-                        //Remove Muddled
+                        waningConditions.Add(condition);
                         break;
                     case "Crippled":
-                        //health = health -1;
-                        //Remove Crippled
+                        waningConditions.Add(condition);
                         break;
                     case "Disarmed":
-                        //currentTurn = false;
-                        //Remove Disarmed
+                        //No Attack Action?
+                        waningConditions.Add(condition);
                         break;
                     case "Cursed":
                         //modifierDeck.Add(CursedCard);
-                        //Remove Cursed
+                        waningConditions.Add(condition);
                         break;
                     case "Blessed":
                         //modifierDeck.Add(BlessedCard);
-                        //Remove Blessed
+                        waningConditions.Add(condition);
                         break;
                     case "Strengthend":
                         //DisAdvantage = true;
-                        //Remove Strengthend
+                        waningConditions.Add(condition);
                         break;
                     case "Invisible":
-                        //Remove Invisible
+                        waningConditions.Add(condition);
                         break;
                 }
             }
