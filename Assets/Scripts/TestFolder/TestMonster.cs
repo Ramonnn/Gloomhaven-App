@@ -7,6 +7,7 @@ public class TestMonster : MonoBehaviour
 {
     public TestCurrentMonsters currentMonster;
     public TestMonsterPanel monsterPanel;
+    public ModifierDrawCard modifierDrawDeck;
     public GameObject calculator;
     public Text healthText;
     public List<GameObject> enemyConditions = new List<GameObject>();
@@ -15,7 +16,7 @@ public class TestMonster : MonoBehaviour
     public Toggle currentTurn;
     public Image[] shieldValues;
     public int remainingHealth, maxHealth, shield;
-    public bool poisoned, wounded, dazed;
+    public bool poisoned, wounded, dazed, muddled, strengthend;
 
     private void OnDisable()
     {
@@ -96,6 +97,10 @@ public class TestMonster : MonoBehaviour
     {
         currentTurn.isOn = true;
         ApplyConditionEffect();
+        if (muddled != strengthend)
+        {
+            modifierDrawDeck.drawTwo = true;
+        }
     }
 
     public void RemoveCondition()
@@ -144,7 +149,7 @@ public class TestMonster : MonoBehaviour
                         waningConditions.Add(condition);
                         break;
                     case "Muddled":
-                        //DisAdvantage = true;
+                        muddled = true;
                         waningConditions.Add(condition);
                         break;
                     case "Crippled":
@@ -155,15 +160,17 @@ public class TestMonster : MonoBehaviour
                         waningConditions.Add(condition);
                         break;
                     case "Cursed":
-                        //modifierDeck.Add(CursedCard);
+                        modifierDrawDeck.standardModifierDeck.Add(modifierDrawDeck.curse);
+                        modifierDrawDeck.curseModifier.SetActive(true);
                         waningConditions.Add(condition);
                         break;
                     case "Blessed":
-                        //modifierDeck.Add(BlessedCard);
+                        modifierDrawDeck.standardModifierDeck.Add(modifierDrawDeck.bless);
+                        modifierDrawDeck.blessModifier.SetActive(true);
                         waningConditions.Add(condition);
                         break;
                     case "Strengthend":
-                        //DisAdvantage = true;
+                       strengthend = true;
                         waningConditions.Add(condition);
                         break;
                     case "Invisible":

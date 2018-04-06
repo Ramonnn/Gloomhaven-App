@@ -8,19 +8,23 @@ public class ModifierDrawCard : MonoBehaviour
     public Sprite[] modifierImages;
     private Image modifier, shuffleIcon;
     public GameObject disAdvantage;
-    public List<ModifierCard> standardModifierDeck = new List<ModifierCard>();
+    public List<ModifierCard> standardModifierDeck;
     public List<ModifierCard> discardPile = new List<ModifierCard>();
+    public ModifierCard curse, bless, stockCard;
     private ModifierCard currentCard;
+    public GameObject modifierDeck, blessModifier, curseModifier;
     public bool sendShuffleMessage, drawTwo;
     private int topDeck;
     private Text monsterM;
 
     void Start()
     {
-        standardModifierDeck = GetComponent<ModifierDeck>().standardModifierDeck;
-        modifier = gameObject.transform.parent.transform.GetChild(1).transform.GetChild(0).transform.GetComponent<Image>();
-        shuffleIcon = gameObject.transform.parent.transform.GetChild(1).transform.GetChild(1).transform.GetComponent<Image>();
-        monsterM = gameObject.transform.parent.transform.GetChild(1).transform.GetChild(2).transform.GetComponent<Text>();
+        standardModifierDeck = new List<ModifierCard>(GetComponent<TestModifierDeck>().standardModifierDeck);
+        curse = GetComponent<TestModifierDeck>().availableModifierCards[1];
+        bless = GetComponent<TestModifierDeck>().availableModifierCards[0];
+        modifier = modifierDeck.transform.GetChild(0).GetComponent<Image>();
+        shuffleIcon = modifierDeck.transform.GetChild(1).GetComponent<Image>();
+        monsterM = modifierDeck.transform.GetChild(2).GetComponent<Text>();
     }
 
     public IEnumerator Wait()
@@ -45,7 +49,7 @@ public class ModifierDrawCard : MonoBehaviour
 
         topDeck = Random.Range(0, standardModifierDeck.Count);
         currentCard = standardModifierDeck[topDeck];
-        
+
         for (int i = 0; i < modifierImages.Length; i++)
         {
             if (modifierImages[i].name == currentCard.cardModifier)
@@ -56,7 +60,18 @@ public class ModifierDrawCard : MonoBehaviour
         monsterM.enabled = true;
         standardModifierDeck.RemoveAt(topDeck);
         Debug.Log("Deck contains " + standardModifierDeck.Count + " Cards");
-        discardPile.Add(currentCard);
+        if (currentCard.cardModifier == "Bless")
+        {
+            blessModifier.SetActive(false);
+        }
+        if (currentCard.cardModifier == "Curse")
+        {
+            curseModifier.SetActive(false);
+        }
+        else
+        {
+            discardPile.Add(currentCard);
+        }
 
         if (currentCard.shuffleDeck)
         {
@@ -69,7 +84,7 @@ public class ModifierDrawCard : MonoBehaviour
             Shuffle();
         }
 
-        if (drawTwo == true) //advantage / disadvantage !! Use drawTwo on Strengthend, Muddled!
+        if (drawTwo == true)
         {
             drawTwo = false;
             disAdvantage.SetActive(true);
@@ -86,7 +101,18 @@ public class ModifierDrawCard : MonoBehaviour
 
             standardModifierDeck.RemoveAt(topDeck);
             Debug.Log("Deck contains " + standardModifierDeck.Count + " Cards");
-            discardPile.Add(currentCard);
+            if (currentCard.cardModifier == "Bless")
+            {
+                blessModifier.SetActive(false);
+            }
+            if (currentCard.cardModifier == "Curse")
+            {
+                curseModifier.SetActive(false);
+            }
+            else
+            {
+                discardPile.Add(currentCard);
+            }
 
             if (currentCard.shuffleDeck)
             {
