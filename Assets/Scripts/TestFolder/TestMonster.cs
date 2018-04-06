@@ -6,28 +6,25 @@ using UnityEngine.UI;
 public class TestMonster : MonoBehaviour
 {
     public TestCurrentMonsters currentMonster;
+    public TestMonsterPanel monsterPanel;
     public GameObject calculator;
     public Text healthText;
-    public List<GameObject> conditions = new List<GameObject>();
+    public List<GameObject> enemyConditions = new List<GameObject>();
+    public List<GameObject> activeEnemyConditions = new List<GameObject>();
     public List<GameObject> waningConditions = new List<GameObject>();
     public Toggle currentTurn;
     public Image[] shieldValues;
     public int remainingHealth, maxHealth, shield;
-    public bool poisoned, wounded;
+    public bool poisoned, wounded, dazed;
 
-    private void OnEnable()
+    private void OnDisable()
     {
         FreshEnemy();
     }
 
-    public void PresentAsRelevant()
-    {
-        calculator.GetComponent<TestCalculatorHandler>().relevantEnemy = gameObject.GetComponent<TestMonster>();
-    }
-
     public void FreshEnemy()
     {
-        foreach (GameObject condition in conditions)
+        foreach (GameObject condition in enemyConditions)
         {
             if (condition.activeSelf)
             {
@@ -40,12 +37,6 @@ public class TestMonster : MonoBehaviour
         healthText.text = maxHealth + "/" + maxHealth;
 
         //Shield Deactivate. Retaliate Deactivate.
-    }
-
-    public void OpenCalculator()
-    {
-        PresentAsRelevant();
-        calculator.SetActive(true);
     }
 
     public void HealthHandler(int damage)
@@ -67,8 +58,8 @@ public class TestMonster : MonoBehaviour
         {
             if (poisoned == true || wounded == true)
             {
-                conditions[0].SetActive(false);
-                conditions[1].SetActive(false);
+                enemyConditions[0].SetActive(false);
+                enemyConditions[1].SetActive(false);
                 poisoned = false;
                 wounded = false;
             }
@@ -103,13 +94,11 @@ public class TestMonster : MonoBehaviour
 
     public void CurrentTurn()
     {
-        if (currentTurn)
-        {
-            ApplyConditionEffect();
-        }
+        currentTurn.isOn = true;
+        ApplyConditionEffect();
     }
 
-    private void RemoveCondition()
+    public void RemoveCondition()
     {
         foreach (GameObject condition in waningConditions)
         {
@@ -118,14 +107,15 @@ public class TestMonster : MonoBehaviour
         waningConditions.Clear();
     }
 
-    public void AddCondition(List<GameObject> conds)
+    public void AddCondition(List<GameObject> activeconditions)
     {
-        foreach (GameObject cond in conds)
+        foreach (GameObject activecondition in activeconditions)
         {
-            foreach (GameObject condition in conditions)
+            foreach (GameObject condition in enemyConditions)
             {
-                if (condition.name == cond.name)
+                if (condition.name == activecondition.name && !activeEnemyConditions.Contains(condition))
                 {
+                    activeEnemyConditions.Add(condition);
                     condition.SetActive(true);
                 }
             }
@@ -134,21 +124,23 @@ public class TestMonster : MonoBehaviour
 
     private void ApplyConditionEffect()
     {
-        foreach (GameObject condition in conditions)
+        foreach (GameObject condition in enemyConditions)
         {
             if (condition.activeSelf)
             {
                 switch (condition.name)
                 {
                     case "Poisoned":
+                        poisoned = true;
                         // See HealthHandler(int damage);
                         break;
                     case "Wounded":
+                        wounded = true;
                         remainingHealth = remainingHealth - 1;
                         healthText.text = remainingHealth + "/" + maxHealth;
                         break;
                     case "Dazed":
-                        //Skip Turn.
+                        dazed = true;
                         waningConditions.Add(condition);
                         break;
                     case "Muddled":

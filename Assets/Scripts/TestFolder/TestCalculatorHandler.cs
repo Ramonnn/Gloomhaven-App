@@ -7,13 +7,27 @@ using UnityEngine.EventSystems;
 public class TestCalculatorHandler : MonoBehaviour
 {
     public List<GameObject> conditions = new List<GameObject>();
-    public List<GameObject> activedConditions = new List<GameObject>();
+    public List<GameObject> activeConditions;
 
     public TestMonster relevantEnemy;
 
     public Text output;
     public GameObject calculator;
     public Toggle heal, damage;
+
+    public void OpenCalculator(GameObject relevant)
+    {
+        relevantEnemy = relevant.GetComponent<TestMonster>();
+        for (int i = 0; i < relevantEnemy.activeEnemyConditions.Count; i++)
+        {
+            if (relevantEnemy.activeEnemyConditions[i].activeSelf)
+            {
+                conditions[i].transform.GetChild(1).gameObject.SetActive(true);
+            }
+        }
+
+        gameObject.SetActive(true);
+    }
 
     public int DamageThroughPut()
     {
@@ -22,16 +36,26 @@ public class TestCalculatorHandler : MonoBehaviour
         return outputInt;
     }
 
-    public List<GameObject> ConditionThroughPut()
+    public List<GameObject> ConditionThroughPut() //bruteforced...
     {
+
+        activeConditions = new List<GameObject>(relevantEnemy.activeEnemyConditions);
         foreach (GameObject condition in conditions)
         {
-            if (condition.GetComponent<Toggle>().isOn && !activedConditions.Contains(condition))
+            if (condition.GetComponentInChildren<Toggle>().isOn)
             {
-                activedConditions.Add(condition);
+                foreach (GameObject conditionIcon in relevantEnemy.enemyConditions)
+                {
+                    if (conditionIcon.name == condition.name && !activeConditions.Contains(conditionIcon))
+                    {
+                        condition.transform.GetChild(0).gameObject.SetActive(true);
+                        activeConditions.Add(conditionIcon);
+                    }
+                }
+                condition.GetComponentInChildren<Toggle>().isOn = false;
             }
         }
-        return activedConditions;
+        return activeConditions;
     }
 
 
@@ -39,13 +63,10 @@ public class TestCalculatorHandler : MonoBehaviour
     {
         if (output.text != "")
         {
-            relevantEnemy.HealthHandler(DamageThroughPut());
             output.text = "";
+            relevantEnemy.HealthHandler(DamageThroughPut());
         }
-        if (activedConditions.Count != 0)
-        {
-            relevantEnemy.AddCondition(ConditionThroughPut());
-        }
+        relevantEnemy.AddCondition(ConditionThroughPut());
         gameObject.SetActive(false);
     }
 }

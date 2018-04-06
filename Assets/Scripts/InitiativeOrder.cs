@@ -15,7 +15,7 @@ public class InitiativeOrder : MonoBehaviour
             enemiesSetInitiative.Add(gameObject.transform.GetChild(i).gameObject);
         }
 
-        enemiesSetInitiative.Sort((p1, p2) => p1.transform.GetChild(0).transform.GetChild(3).GetComponentInChildren<DrawCard>().intInitiative.CompareTo(p2.transform.GetChild(0).transform.GetChild(3).GetComponentInChildren<DrawCard>().intInitiative));
+        //enemiesSetInitiative.Sort((p1, p2) => p1.transform.GetChild(0).transform.GetChild(3).GetComponentInChildren<DrawCard>().intInitiative.CompareTo(p2.transform.GetChild(0).transform.GetChild(3).GetComponentInChildren<DrawCard>().intInitiative));
 
         for (int i = 0; i < gameObject.transform.childCount; i++)
         {

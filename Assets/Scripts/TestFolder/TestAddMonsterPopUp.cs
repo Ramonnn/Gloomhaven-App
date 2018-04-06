@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class TestAddMonsterPopUp : MonoBehaviour
 {
-
     public List<GameObject> popUpMonsters = new List<GameObject>();
+    public TestMonsterPanel monsterPanel;
     public GameObject addMonsterPopUp;
 
     public void MonsterPopUp()
@@ -20,27 +20,4 @@ public class TestAddMonsterPopUp : MonoBehaviour
             addMonsterPopUp.SetActive(true);
         }
     }
-
-    public void AddMonsters()
-    {
-        foreach (GameObject enemy in popUpMonsters)
-        {
-            if (enemy.GetComponent<TestActiveEnemy>().normalToggle.isOn)
-            {
-                enemy.GetComponent<TestActiveEnemy>().normal.SetActive(true);
-                enemy.GetComponent<TestActiveEnemy>().elite.SetActive(false);
-            }
-            else if (enemy.GetComponent<TestActiveEnemy>().eliteToggle.isOn)
-            {
-                enemy.GetComponent<TestActiveEnemy>().elite.SetActive(true);
-                enemy.GetComponent<TestActiveEnemy>().normal.SetActive(false);
-            }
-            else
-            {
-                enemy.GetComponent<TestActiveEnemy>().elite.SetActive(false);
-                enemy.GetComponent<TestActiveEnemy>().normal.SetActive(false);
-            }
-        }
-    }
-
 }
