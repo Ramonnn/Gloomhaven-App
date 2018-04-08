@@ -9,7 +9,8 @@ public class TestLoadMonsterData : MonoBehaviour
     private JSONNode MONSTERSTATS, DECKS;
     private string monsterStatsFileName = "monsterstats.json";
     private string combinationsFileName = "monsters.json";
-    private string decksFileName = "decks.json";
+    //private string decksFileName = "decks.json";
+    private string decksFileName = "testdecks.json";
     public Monsters loadedMonsters;
     public ElitesAndNormals elitesAndNormals;
     private List<string> scenarioMonsters;

@@ -63,8 +63,8 @@ public class TestCalculatorHandler : MonoBehaviour
     {
         if (output.text != "")
         {
-            output.text = "";
             relevantEnemy.HealthHandler(DamageThroughPut());
+            output.text = "";
         }
         relevantEnemy.AddCondition(ConditionThroughPut());
         gameObject.SetActive(false);

@@ -1,0 +1,350 @@
+{ "decks" : [
+        { "monsterclass": "Ancient Artillery"
+        , "cards":
+            [ { "shuffle" : false, "initiative" : "46", "cardlines" : [ "Attack <sprite=20> -1", "Range <sprite=22> +2"] }
+            , { "shuffle" : true, "initiative" : "71", "cardlines" : [ "Attack <sprite=20> +0", "Range <sprite=22> +0", "** All adjacent enemies suffer 2 damage"] }
+            , { "shuffle" : true, "initiative" : "71", "cardlines" : [ "Attack <sprite=20> +0", "Range <sprite=22> +0", "** All adjacent enemies suffer 2 damage"] }
+            , { "shuffle" : false, "initiative" : "37", "cardlines" : [ "Push <sprite=6> 1", "** Target all adjacent enemies", "Attack <sprite=20> -1 %aoe-triangle-2-side%", "Range <sprite=22> -1"] }
+            , { "shuffle" : false, "initiative" : "37", "cardlines" : [ "Push <sprite=6> 1", "** Target all adjacent enemies", "Attack <sprite=20> -1 %aoe-circle%", "Range <sprite=22> -1"] }
+            , { "shuffle" : false, "initiative" : "17", "cardlines" : [ "Push <sprite=6> 2", "** Target all adjacent enemies", "Shield <sprite=26> 2", "Attack <sprite=20> -2", "Range <sprite=22> +0"] }
+            , { "shuffle" : false, "initiative" : "95", "cardlines" : [ "Attack <sprite=20> +1","Range <sprite=22> +0"] }
+            , { "shuffle" : false, "initiative" : "46", "cardlines" : [ "Attack <sprite=20> -1 %aoe-triangle-2-side%", "Range <sprite=22> +0","Immobilize <sprite=2>"] }
+            ]
+        },
+        { "monsterclass": "Archer"
+        , "cards":
+            [ { "shuffle" : false, "initiative" : "16", "cardlines" : [ "Move <sprite=23> +1", "Attack <sprite=20> -1", "Range <sprite=22> +0"] }
+            , { "shuffle" : false, "initiative" : "31", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> +0", "Range <sprite=22> +0"] }
+            , { "shuffle" : false, "initiative" : "32", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> +1", "Range <sprite=22> -1"] }
+            , { "shuffle" : false, "initiative" : "44", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> +1", "Range <sprite=22> +0"] }
+            , { "shuffle" : false, "initiative" : "56", "cardlines" : [ "Attack <sprite=20> -1", "Range <sprite=22> +0", "Target <sprite=33> 2"] }
+            , { "shuffle" : true, "initiative" : "68", "cardlines" : [ "Attack <sprite=20> +1", "Range <sprite=22> +1"] }
+            , { "shuffle" : false, "initiative" : "14", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> -1", "Range <sprite=22> +0", "* <span class='small'> Create a 3 damage trap in an adjacent empty hex closest to an enemy </span>"] }
+            , { "shuffle" : true, "initiative" : "29", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> -1", "Range <sprite=22> +1", "Immobilize <sprite=2>"] }
+            ]
+        },
+        { "monsterclass": "Boss"
+        , "cards":
+            [ { "shuffle" : false, "initiative" : "11", "cardlines" : [ "* Special 2"] }
+            , { "shuffle" : false, "initiative" : "14", "cardlines" : [ "* Special 2"] }
+            , { "shuffle" : true, "initiative" : "17", "cardlines" : [ "* Special 2"] }
+            , { "shuffle" : true, "initiative" : "85", "cardlines" : [ "* Special 1"] }
+            , { "shuffle" : false, "initiative" : "79", "cardlines" : [ "* Special 1"] }
+            , { "shuffle" : false, "initiative" : "73", "cardlines" : [ "* Special 1"] }
+            , { "shuffle" : false, "initiative" : "36", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> +0"] }
+            , { "shuffle" : false, "initiative" : "52", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> -1", "Range <sprite=22> 3", "Target <sprite=33> 2"] }
+            ]
+        },
+        { "monsterclass": "Cave Bear"
+        , "cards":
+            [ { "shuffle" : false, "initiative" : "13", "cardlines" : [ "Move <sprite=23> +1", "Attack <sprite=20> -1"] }
+            , { "shuffle" : false, "initiative" : "14", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> -1", "Immobilize <sprite=2>"] }
+            , { "shuffle" : true, "initiative" : "34", "cardlines" : [ "Attack <sprite=20> +1", "<sprite=0>"] }
+            , { "shuffle" : false, "initiative" : "41", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> +0"] }
+            , { "shuffle" : false, "initiative" : "60", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> +1"] }
+            , { "shuffle" : true, "initiative" : "80", "cardlines" : [ "Attack <sprite=20> -1", "Move <sprite=23> -2", "Attack <sprite=20> -1", "<sprite=0>"] }
+            , { "shuffle" : false, "initiative" : "61", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> -1", "Target <sprite=33> 2"] }
+            , { "shuffle" : false, "initiative" : "03", "cardlines" : [ "Shield <sprite=26> 1", "Retaliate <sprite=28> 2", "Heal <sprite=21> 2", "** Self"] }
+            ]
+        },
+        { "monsterclass": "Cultist"
+        , "cards":
+            [ { "shuffle" : false, "initiative" : "10", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> -1", "* On Death:", "*Attack <sprite=20> +2 %aoe-circle-with-middle-black%"] }
+            , { "shuffle" : false, "initiative" : "10", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> -1", "* On Death:", "*Attack <sprite=20> +2 %aoe-circle-with-middle-black%"] }
+            , { "shuffle" : false, "initiative" : "27", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> +0"] }
+            , { "shuffle" : false, "initiative" : "27", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> +0"] }
+            , { "shuffle" : false, "initiative" : "39", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> +0", "Heal <sprite=21> 1", "** Self"] }
+            , { "shuffle" : true, "initiative" : "63", "cardlines" : [ "* Summon normal Living Bones", "* Cultist suffers 2 damage."] }
+            , { "shuffle" : true, "initiative" : "63", "cardlines" : [ "* Summon normal Living Bones", "* Cultist suffers 2 damage."] }
+            , { "shuffle" : false, "initiative" : "31", "cardlines" : [ "Move <sprite=23> -1", "Heal <sprite=21> 3", "Range <sprite=22> 3"] }
+            ]
+        },
+        { "monsterclass": "Deep Terror"
+        , "cards":
+            [ { "shuffle" : false, "initiative" : "65", "cardlines" : [ "Attack <sprite=20> +0", "Range <sprite=22> 3", "Target <sprite=33> 3", "** %curse%"] }
+            , { "shuffle" : true, "initiative" : "60", "cardlines" : [ "Attack <sprite=20> +0 %aoe-line-6-with-black%", "Pierce <sprite=5> 3"] }
+            , { "shuffle" : true, "initiative" : "60", "cardlines" : [ "Attack <sprite=20> +0 %aoe-line-6-with-black%", "Pierce <sprite=5> 3"] }
+            , { "shuffle" : false, "initiative" : "84", "cardlines" : [ "Attack <sprite=20> -1", "** Target all adjacent enemies", "Attack <sprite=20> +0", "Range <sprite=22> 4", "<sprite=0>"] }
+            , { "shuffle" : false, "initiative" : "75", "cardlines" : [ "Attack <sprite=20> +0", "Posion <sprite=48>", "Attack <sprite=20> -1", "Range <sprite=22> 5", "Immobilize <sprite=2>"] }
+            , { "shuffle" : false, "initiative" : "75", "cardlines" : [ "Attack <sprite=20> -2", "** Target all adjacent enemies", "** %disarm%", "Attack <sprite=20> +0", "Range <sprite=22> 3", "Target <sprite=33> 2"] }
+            , { "shuffle" : false, "initiative" : "96", "cardlines" : [ "Attack <sprite=20> -2", "Range <sprite=22> 6", "** Summon normal Deep Terror in a hex adjacent to the target"] }
+            , { "shuffle" : false, "initiative" : "54", "cardlines" : [ "Wound <sprite=0> and Posion <sprite=48>", "** Target all adjacent enemies", "Attack <sprite=20> +0", "Range <sprite=22> 4"] }
+            ]
+        },
+        { "monsterclass": "Earth Demon"
+        , "cards":
+            [ { "shuffle" : true, "initiative" : "40", "cardlines" : [ "Heal <sprite=21> 3", "** Self", "* %earth%<sprite=15>: <span class='small'>Immobilize <sprite=2> Target all enemies within %range% 3</span>"] }
+            , { "shuffle" : true, "initiative" : "42", "cardlines" : [ "Move <sprite=23> +1", "Attack <sprite=20> -1"] }
+            , { "shuffle" : false, "initiative" : "62", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> +0", "* %earth%"] }
+            , { "shuffle" : false, "initiative" : "71", "cardlines" : [ "Attack <sprite=20> +0", "Range <sprite=22> 4", "** %earth%<sprite=15>: %target% 2"] }
+            , { "shuffle" : false, "initiative" : "83", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> +1", "* %earth%"] }
+            , { "shuffle" : false, "initiative" : "93", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> -1", "** Target all adjacent enemies", "* %earth%<sprite=15>: %push% 1"] }
+            , { "shuffle" : false, "initiative" : "79", "cardlines" : [ "Move <sprite=23> +1", "Attack <sprite=20> +0", "** %air%<sprite=15>: -2 %attack%"] }
+            , { "shuffle" : false, "initiative" : "87", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> -1 <div class='collapse'>%aoe-4-with-black%</div>", "* %any%<sprite=15>: %earth%"] }
+            ]
+        },
+        { "monsterclass": "Flame Demon"
+        , "cards":
+            [ { "shuffle" : false, "initiative" : "03", "cardlines" : [ "Move <sprite=23> +1", "Attack <sprite=20> -1", "Range <sprite=22> +0","* %fire%"] }
+            , { "shuffle" : false, "initiative" : "24", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> +0", "Range <sprite=22> +0","* %fire%"] }
+            , { "shuffle" : true, "initiative" : "46", "cardlines" : [ "Attack <sprite=20> +0", "Range <sprite=22> +0", "** %fire%<sprite=15>: %aoe-circle%"] }
+            , { "shuffle" : false, "initiative" : "49", "cardlines" : [ "Attack <sprite=20> +0 %aoe-line-3-with-black%", "** <table align='center'><tr><td>%fire%<sprite=15>:</td> <td> +1 %attack% <br> %wound% </td> </tr> </table>"] }
+            , { "shuffle" : false, "initiative" : "67", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> +1", "Range <sprite=22> -1", "* %fire%"] }
+            , { "shuffle" : false, "initiative" : "77", "cardlines" : [ "Attack <sprite=20> +0", "** Target all adjacent enemies", "** %ice%<sprite=15>:Flame Demon suffers 1 damage."] }
+            , { "shuffle" : true, "initiative" : "30", "cardlines" : [ "* <table align='center'><tr> <td> %fire%<sprite=15>: </td> <td> <span class='small'>All adjacent enemies<br/>suffer 2 damage.</span> </td> </tr> </table>", "Move <sprite=23> +0", "Attack <sprite=20> -2", "<sprite=0>","Target <sprite=33> 2"] }
+            , { "shuffle" : false, "initiative" : "08", "cardlines" : [ "Move <sprite=23> -1", "* <span class='small'> Create a 4 damage trap in an adjacent empty hex closest to an enemy </span>", "* %any%<sprite=15>: %fire%"] }
+            ]
+        },
+        { "monsterclass": "Frost Demon"
+        , "cards":
+            [ { "shuffle" : false, "initiative" : "18", "cardlines" : [ "* Immobilize <sprite=2>", "** Target all enemies within %range% 2", "* %ice%<sprite=15>: <span class='small'>Heal <sprite=21> 3<br/>Self</span>"] }
+            , { "shuffle" : false, "initiative" : "38", "cardlines" : [ "Move <sprite=23> +1", "Attack <sprite=20> -1"] }
+            , { "shuffle" : false, "initiative" : "58", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> +0"] }
+            , { "shuffle" : false, "initiative" : "58", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> +0" , "Range <sprite=22> 2", "** %ice%<sprite=15>: +2 %attack%, +1 %range%"] }
+            , { "shuffle" : true, "initiative" : "78", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> +0 %aoe-triangle-2-side-with-black%", "* %ice%"] }
+            , { "shuffle" : true, "initiative" : "78", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> +0 %aoe-triangle-2-side-with-black%", "* %ice%"] }
+            , { "shuffle" : false, "initiative" : "58", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> -1", "Pierce <sprite=5> 3", "* %any%<sprite=15>: %ice%"] }
+            , { "shuffle" : false, "initiative" : "18", "cardlines" : [ "Shield <sprite=26> 2", "Move <sprite=23> +1", "* %fire%<sprite=15>: <span class='small'>Frost Demon suffers 1 damage</span>"] }
+            ]
+        },
+        { "monsterclass": "Giant Viper"
+        , "cards":
+            [ { "shuffle" : true, "initiative" : "32", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> +0", "** Add +2 Attack if the target is adjacent to any of the Giant Viper's allies."] }
+            , { "shuffle" : true, "initiative" : "32", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> +0", "** Add +2 Attack if the target is adjacent to any of the Giant Viper's allies."] }
+            , { "shuffle" : false, "initiative" : "11", "cardlines" : [ "Shield <sprite=26> 1", "Attack <sprite=20> -1"] }
+            , { "shuffle" : false, "initiative" : "43", "cardlines" : [ "Move <sprite=23> +1", "Jump <sprite=27>", "Attack <sprite=20> -1", "** Target all adjacent enemies."] }
+            , { "shuffle" : false, "initiative" : "58", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> +1"] }
+            , { "shuffle" : false, "initiative" : "58", "cardlines" : [ "Move <sprite=23> +1", "Jump <sprite=27>", "Attack <sprite=20> -1", "** All attacks targeting Giant Viper this round gain Disadvantage."] }
+            , { "shuffle" : false, "initiative" : "43", "cardlines" : [ "Move <sprite=23> -1", "Jump <sprite=27>", "Attack <sprite=20> +0", "Target <sprite=33> 2"] }
+            , { "shuffle" : false, "initiative" : "23", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> -1", "Immobilize <sprite=2>", "Attack <sprite=20> -1"] }
+            ]
+        },
+        { "monsterclass": "Guard"
+        , "cards":
+            [ { "shuffle" : true, "initiative" : "15", "cardlines" : [ "Shield <sprite=26> 1", "Retaliate <sprite=28> 2"] }
+            , { "shuffle" : false, "initiative" : "30", "cardlines" : [ "Move <sprite=23> +1", "Attack <sprite=20> -1"] }
+            , { "shuffle" : false, "initiative" : "35", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> +0", "Range <sprite=22> 2"] }
+            , { "shuffle" : false, "initiative" : "50", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> +0"] }
+            , { "shuffle" : false, "initiative" : "50", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> +0"] }
+            , { "shuffle" : false, "initiative" : "70", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> +1"] }
+            , { "shuffle" : false, "initiative" : "55", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> +0", "Strengthen <sprite=8>", "** Self"] }
+            , { "shuffle" : true , "initiative" : "15", "cardlines" : [ "Shield <sprite=26> 1", "Attack <sprite=20> +0", "Posion <sprite=48>"] }
+            ]
+        },
+        { "monsterclass": "Harrower Infester"
+        , "cards":
+            [ { "shuffle" : false, "initiative" : "38", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> +1", "Target <sprite=33> 2"] }
+            , { "shuffle" : false, "initiative" : "07", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> -1", "Posion <sprite=48>", "Dark <sprite=17>"] }
+            , { "shuffle" : false, "initiative" : "16", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> -1", "Heal <sprite=21> 5", "** Self"] }
+            , { "shuffle" : false, "initiative" : "16", "cardlines" : [ "Attack <sprite=20> +2", "Immobilize <sprite=2>", "Retaliate <sprite=28> 2"] }
+            , { "shuffle" : true, "initiative" : "02", "cardlines" : [ "Shield <sprite=26> 2", "Retaliate <sprite=28> 2", "Range <sprite=22> 3"] }
+            , { "shuffle" : false, "initiative" : "30", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> +0 %aoe-line-4-with-black%", "*Dark <sprite=17><sprite=15>: Perform \"Heal <sprite=21> 2, Self\" </br>for each target damaged"] }
+            , { "shuffle" : false, "initiative" : "38", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> -1", "Target <sprite=33> 2", "*Dark <sprite=17><sprite=15>: +2 %attack%, %disarm%"] }
+            , { "shuffle" : true, "initiative" : "07", "cardlines" : [ "Attack <sprite=20> -1", "Range <sprite=22> 3", "*Muddle <sprite=4>", "Heal <sprite=21> 4", "** Self"] }
+            ]
+        },
+        { "monsterclass": "Hound"
+        , "cards":
+            [ { "shuffle" : false, "initiative" : "06", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> +0", "Immobilize <sprite=2>"] }
+            , { "shuffle" : false, "initiative" : "07", "cardlines" : [ "Move <sprite=23> +0", "Muddle <sprite=4>", "** Target all adjacent enemies"] }
+            , { "shuffle" : true, "initiative" : "19", "cardlines" : [ "Move <sprite=23> +1", "Attack <sprite=20> +0", "** Add +2 Attack if the target is adjacent to any of the Hound's allies"] }
+            , { "shuffle" : true, "initiative" : "19", "cardlines" : [ "Move <sprite=23> +1", "Attack <sprite=20> +0", "** Add +2 Attack if the target is adjacent to any of the Hound's allies"] }
+            , { "shuffle" : false, "initiative" : "26", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> +0"] }
+            , { "shuffle" : false, "initiative" : "26", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> +0"] }
+            , { "shuffle" : false, "initiative" : "83", "cardlines" : [ "Move <sprite=23> -2", "Attack <sprite=20> +1"] }
+            , { "shuffle" : false, "initiative" : "72", "cardlines" : [ "Attack <sprite=20> -1", "Pierce <sprite=5> 2", "Move <sprite=23> -2", "Attack <sprite=20> -1", "Pierce <sprite=5> 2"] }
+            ]
+		},
+        { "monsterclass": "Imp"
+        , "cards":
+            [ { "shuffle" : false, "initiative" : "05", "cardlines" : [ "Shield <sprite=26> 5", "Heal <sprite=21> 1", "** Self"] }
+            , { "shuffle" : false, "initiative" : "37", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> +0","Range <sprite=22> +0"] }
+            , { "shuffle" : false, "initiative" : "37", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> +0","Range <sprite=22> +0"] }
+            , { "shuffle" : false, "initiative" : "42", "cardlines" : [ "Move <sprite=23> +1", "Heal <sprite=21> 2"] }
+            , { "shuffle" : true, "initiative" : "43", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> -1", "Range <sprite=22> +0, %target% 2, Posion <sprite=48>"] }
+            , { "shuffle" : false, "initiative" : "76", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> +1", "Range <sprite=22> +0"] }
+            , { "shuffle" : true, "initiative" : "43", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> -1", "Range <sprite=22> +0, %target% 2, %curse%"] }
+            , { "shuffle" : false, "initiative" : "24", "cardlines" : [ "Strengthen <sprite=8>", "** Affect all allies within %range% 2", "Muddle <sprite=4>", "** Target all enemies within %range% 2"] }
+            ]
+        },
+        { "monsterclass": "Living Bones"
+        , "cards":
+            [ { "shuffle" : false, "initiative" : "64", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> +1"] }
+            , { "shuffle" : true, "initiative" : "20", "cardlines" : [ "Move <sprite=23> -2", "Attack <sprite=20> +0", "Heal <sprite=21> 2", "** Self"] }
+            , { "shuffle" : false, "initiative" : "25", "cardlines" : [ "Move <sprite=23> +1", "Attack <sprite=20> -1"] }
+            , { "shuffle" : false, "initiative" : "45", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> +0"] }
+            , { "shuffle" : false, "initiative" : "45", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> +0"] }
+            , { "shuffle" : false, "initiative" : "81", "cardlines" : [ "Attack <sprite=20> +2"] }
+            , { "shuffle" : false, "initiative" : "74", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> +0", "** Target one enemy with all attacks"] }
+            , { "shuffle" : true, "initiative" : "12", "cardlines" : [ "Shield <sprite=26> 1", "Heal <sprite=21> 2", "** Self"] }
+            ]
+        },
+        { "monsterclass": "Living Corpse"
+        , "cards":
+            [ { "shuffle" : false, "initiative" : "21", "cardlines" : [ "Move <sprite=23> +1", "Muddle <sprite=4> and Immobilize <sprite=2>", "** Target one adjacent enemy"] }
+            , { "shuffle" : false, "initiative" : "47", "cardlines" : [ "Move <sprite=23> +1", "Attack <sprite=20> -1"] }
+            , { "shuffle" : true, "initiative" : "66", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> +0"] }
+            , { "shuffle" : true, "initiative" : "66", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> +0"] }
+            , { "shuffle" : false, "initiative" : "82", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> +1"] }
+            , { "shuffle" : false, "initiative" : "91", "cardlines" : [ "Move <sprite=23> +1", "* Living Corpse suffers 1 damage."] }
+            , { "shuffle" : false, "initiative" : "71", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> +1", "* Posion <sprite=48>", "** Target all adjacent enemies"] }
+            , { "shuffle" : false, "initiative" : "32", "cardlines" : [ "Attack <sprite=20> +2", "*Push <sprite=6> 1", "* Living Corpse suffers 1 damage."] }
+            ]
+        },
+        { "monsterclass": "Living Spirit"
+        , "cards":
+            [ { "shuffle" : true, "initiative" : "22", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> -1", "Range <sprite=22> +0", "*Muddle <sprite=4>"] }
+            , { "shuffle" : true, "initiative" : "33", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> -1", "Range <sprite=22> +0", "** Target all enemies within range"] }
+            , { "shuffle" : false, "initiative" : "48", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> +0", "Range <sprite=22> +0"] }
+            , { "shuffle" : false, "initiative" : "48", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> +0", "Range <sprite=22> +0"] }
+            , { "shuffle" : false, "initiative" : "61", "cardlines" : [ "Attack <sprite=20> +0", "Range <sprite=22> -1", "Target <sprite=33> 2"] }
+            , { "shuffle" : false, "initiative" : "75", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> +1", "Range <sprite=22> -1", "Heal <sprite=21> 1", "** Self"] }
+            , { "shuffle" : false, "initiative" : "55", "cardlines" : [ "Move <sprite=23> +0", "* %curse%", "Range <sprite=22> +0", "** Target all enemies within range", "* %ice%"] }
+            , { "shuffle" : false, "initiative" : "67", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> +1", "Range <sprite=22> +0", "** %ice%<sprite=15>: %stun%"] }
+            ]
+        },
+        { "monsterclass": "Lurker"
+        , "cards":
+            [ { "shuffle" : true, "initiative" : "11", "cardlines" : [ "Shield <sprite=26> 1", "** %ice%<sprite=15>: %shield% 2 instead","Wound <sprite=0>", "** Target all adjacent enemies"] }
+            , { "shuffle" : false, "initiative" : "28", "cardlines" : [ "Move <sprite=23> +1", "Attack <sprite=20> -1"] }
+            , { "shuffle" : false, "initiative" : "38", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> +0"] }
+            , { "shuffle" : false, "initiative" : "38", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> +0", "** Target one enemy with all attacks"] }
+            , { "shuffle" : false, "initiative" : "61", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> +1"] }
+            , { "shuffle" : false, "initiative" : "64", "cardlines" : [ "Attack <sprite=20> +1", "** Target all adjacent enemies"] }
+            , { "shuffle" : false, "initiative" : "41", "cardlines" : [ "* %ice%<sprite=15>: %strengthen%", "** Self", "Move <sprite=23> +0", "Attack <sprite=20> -1", "<sprite=0>"] }
+            , { "shuffle" : true, "initiative" : "23", "cardlines" : [ "Shield <sprite=26> 1", "Move <sprite=23> +0", "Attack <sprite=20> -1", "* %ice%"] }
+            ]
+        },
+        { "monsterclass": "Night Demon"
+        , "cards":
+            [ { "shuffle" : false, "initiative" : "04", "cardlines" : [ "Move <sprite=23> +1", "Attack <sprite=20> -1", "Dark <sprite=17>"] }
+            , { "shuffle" : false, "initiative" : "07", "cardlines" : [ "Move <sprite=23> +1", "Attack <sprite=20> -1", "Dark <sprite=17><sprite=15>: %invisible%", "** Self"] }
+            , { "shuffle" : false, "initiative" : "22", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> +0", "Dark <sprite=17>"] }
+            , { "shuffle" : false, "initiative" : "26", "cardlines" : [ "Attack <sprite=20> -2", "Range <sprite=22> 3", "Target <sprite=33> 3", "*Dark <sprite=17><sprite=15>: Muddle <sprite=4>"] }
+            , { "shuffle" : true, "initiative" : "46", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> +1", "*Dark <sprite=17><sprite=15>: +2 %attack%"] }
+            , { "shuffle" : true, "initiative" : "41", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> +1", "Dark <sprite=17>"] }
+            , { "shuffle" : false, "initiative" : "35", "cardlines" : [ "Attack <sprite=20> -1", "Attack <sprite=20> -1", "Pierce <sprite=5> 2", "Light <sprite=12><sprite=15>: %curse%", "** Self"] }
+            , { "shuffle" : false, "initiative" : "15", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> -1", "* <span class='small'>All adjacent enemies and allies suffer 1 damage.</span>", "* <span class='small'>%any%<sprite=15>: %dark%</span>"] }
+            ]
+        },
+        { "monsterclass": "Ooze"
+        , "cards":
+          [ { "shuffle" : false, "initiative" : "36", "cardlines" : [ "Move <sprite=23> +1", "Attack <sprite=20> -1", "Range <sprite=22> +0"] }
+            , { "shuffle" : false, "initiative" : "57", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> +0", "Range <sprite=22> +0"] }
+            , { "shuffle" : false, "initiative" : "59", "cardlines" : [ "Attack <sprite=20> +0", "Range <sprite=22> +0", "Target <sprite=33> 2", "Posion <sprite=48>"] }
+            , { "shuffle" : false, "initiative" : "66", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> +1", "Range <sprite=22> +1"] }
+            , { "shuffle" : true, "initiative" : "94", "cardlines" : [ "* Ooze suffers 2 damage ", "** <span class='small'>Summons normal Ooze with a hit point value equal to the summoning Ooze's current hit point value (limited by a normal Ooze's specified maximum hit point value)</span>"] }
+            , { "shuffle" : true, "initiative" : "94", "cardlines" : [ "* Ooze suffers 2 damage ", "** <span class='small'>Summons normal Ooze with a hit point value equal to the summoning Ooze's current hit point value (limited by a normal Ooze's specified maximum hit point value)</span>"] }
+            , { "shuffle" : false, "initiative" : "85", "cardlines" : [ "Push <sprite=6> 1 and", "* Posion <sprite=48>", "** Target all adjacent enemies", "Attack <sprite=20> +1", "Range <sprite=22> -1"] }
+            , { "shuffle" : false, "initiative" : "66", "cardlines" : [ "Move <sprite=23> -1", "Loot <sprite=25> 1", "Heal <sprite=21> 2", "** Self"] }
+            ]
+        },
+        { "monsterclass": "Rending Drake"
+        , "cards":
+            [ { "shuffle" : false, "initiative" : "12", "cardlines" : [ "Move <sprite=23> +1", "Attack <sprite=20> -1"] }
+            , { "shuffle" : true, "initiative" : "13", "cardlines" : [ "Attack <sprite=20> -1", "Move <sprite=23> -1", "Attack <sprite=20> -1"] }
+            , { "shuffle" : false, "initiative" : "25", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> +0"] }
+            , { "shuffle" : false, "initiative" : "39", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> +1"] }
+            , { "shuffle" : false, "initiative" : "54", "cardlines" : [ "Move <sprite=23> -2", "Attack <sprite=20> -1", "Range <sprite=22> 3", "Target <sprite=33> 2", "Posion <sprite=48>"] }
+            , { "shuffle" : false, "initiative" : "59", "cardlines" : [ "Move <sprite=23> -2", "Attack <sprite=20> +1", "Target <sprite=33> 2"] }
+            , { "shuffle" : false, "initiative" : "06", "cardlines" : [ "Shield <sprite=26> 2", "Heal <sprite=21> 2", "** Self", "Strengthen <sprite=8>", "** Self"] }
+            , { "shuffle" : true, "initiative" : "72", "cardlines" : [ "Attack <sprite=20> -1", "Attack <sprite=20> -1", "Attack <sprite=20> -2"] }
+            ]
+        },
+        { "monsterclass": "Savvas Icestorm"
+        , "cards":
+            [ { "shuffle" : false, "initiative" : "70", "cardlines" : [ "Push <sprite=6> 2", "** Target all adjacent enemies", "** %air%<sprite=15>: %push% 4 instead", "Attack <sprite=20> +1", "Range <sprite=22> +1"] }
+            , { "shuffle" : false, "initiative" : "98", "cardlines" : [ "* Summon normal Wind Demon", "* %air%"] }
+            , { "shuffle" : false, "initiative" : "98", "cardlines" : [ "* Summon normal Frost Demon", "* %ice%"] }
+            , { "shuffle" : false, "initiative" : "19", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> -1", "Range <sprite=22> -1", "Shield <sprite=26> 1", "** Affect self and all allies within %range% 2", "* %ice%"] }
+            , { "shuffle" : false, "initiative" : "14", "cardlines" : [ "Attack <sprite=20> +0", "Range <sprite=22> +0", "** %ice%<sprite=15>: +2 %attack%, Immobilize <sprite=2>", "Retaliate <sprite=28> 2", "* %air%"] }
+            , { "shuffle" : false, "initiative" : "14", "cardlines" : [ "Shield <sprite=26> 4", "Heal <sprite=21> 2", "** %ice%<sprite=15>: +3 Heal <sprite=21>", "* %air%<sprite=15>: %attack% +0"] }
+            , { "shuffle" : true, "initiative" : "47", "cardlines" : [ "* %disarm%", "** Target all adjacent enemies", "Move <sprite=23> +0", "Attack <sprite=20> -1", "Range <sprite=22> +0", "* %air%"] }
+            , { "shuffle" : true, "initiative" : "35", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> -1 %aoe-triangle-3-side-with-corner-black% ", "* %ice%"] }
+            ]
+        },
+        { "monsterclass": "Savvas Lavaflow"
+        , "cards":
+            [ { "shuffle" : false, "initiative" : "97", "cardlines" : [ "* Summon normal Flame Demon", "* %fire%"] }
+            , { "shuffle" : false, "initiative" : "97", "cardlines" : [ "* Summon normal Earth Demon", "* %earth%"] }
+            , { "shuffle" : false, "initiative" : "22", "cardlines" : [ "Move <sprite=23> +1", "Attack <sprite=20> -1", "** Target all adjacent enemies", "* %fire%<sprite=15>: %retaliate% 3"] }
+            , { "shuffle" : true, "initiative" : "68", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> +1", "Range <sprite=22> 3", "** All allies and enemies adjacent to the target suffer 2 damage.", "* %earth%"] }
+            , { "shuffle" : false, "initiative" : "41", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> -1 %aoe-line-4-with-black% ", "** %earth%<sprite=15>: +2 %attack%, Immobilize <sprite=2>"] }
+            , { "shuffle" : false, "initiative" : "51", "cardlines" : [ "* All enemies suffer 2 damage.", "* %fire%<sprite=15>: %wound% all enemies", "* %earth%<sprite=15>: %disarm% all enemies"] }
+            , { "shuffle" : false, "initiative" : "31", "cardlines" : [ "Heal <sprite=21> 4", "Range <sprite=22> 3", "** %earth%<sprite=15>: %target% 3"] }
+            , { "shuffle" : true, "initiative" : "68", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> -1", "Range <sprite=22> 3", "Target <sprite=33> 2", "* %fire%"] }
+            ]
+        },
+        { "monsterclass": "Scout"
+        , "cards":
+            [ { "shuffle" : false, "initiative" : "29", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> -1", "Range <sprite=22> 3"] }
+            , { "shuffle" : false, "initiative" : "40", "cardlines" : [ "Move <sprite=23> +1", "Attack <sprite=20> -1"] }
+            , { "shuffle" : false, "initiative" : "53", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> +0"] }
+            , { "shuffle" : false, "initiative" : "54", "cardlines" : [ "Move <sprite=23> -2", "Attack <sprite=20> +0", "Range <sprite=22> 3", "Posion <sprite=48>"] }
+            , { "shuffle" : false, "initiative" : "69", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> +1"] }
+            , { "shuffle" : true, "initiative" : "92", "cardlines" : [ "Attack <sprite=20> +2", "Posion <sprite=48> "] }
+            , { "shuffle" : true, "initiative" : "35", "cardlines" : [ "Move <sprite=23> +1", "Jump <sprite=27>", "Loot <sprite=25> 1"] }
+            , { "shuffle" : false, "initiative" : "79", "cardlines" : [ "Attack <sprite=20> -1", "Range <sprite=22> 4", "Target <sprite=33> 2"] }
+            ]
+        },
+        { "monsterclass": "Shaman"
+        , "cards":
+            [ { "shuffle" : false, "initiative" : "08", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> -1", "Range <sprite=22> +0", "** %disarm%"] }
+            , { "shuffle" : false, "initiative" : "08", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> +0", "Range <sprite=22> +0", "Immobilize <sprite=2>"] }
+            , { "shuffle" : true, "initiative" : "23", "cardlines" : [ "Move <sprite=23> +0", "Heal <sprite=21> 3"] }
+            , { "shuffle" : true, "initiative" : "23", "cardlines" : [ "Move <sprite=23> +0", "Heal <sprite=21> 3"] }
+            , { "shuffle" : false, "initiative" : "62", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> +0", "Range <sprite=22> +0"] }
+            , { "shuffle" : false, "initiative" : "74", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> +1","Range <sprite=22> +0"] }
+            , { "shuffle" : false, "initiative" : "89", "cardlines" : [ "Move <sprite=23> -1", "Heal <sprite=21> 1", "** Affect all adjacent allies", "* %bless%", "** Self"] }
+            , { "shuffle" : false, "initiative" : "09", "cardlines" : [ "Move <sprite=23> +1", "Attack <sprite=20> -1", "Range <sprite=22> +0, %curse%, %target% 2"] }
+            ]
+        },
+        { "monsterclass": "Spitting Drake"
+        , "cards":
+          [ { "shuffle" : false, "initiative" : "32", "cardlines" : [ "Move <sprite=23> +1", "Attack <sprite=20> -1", "Range <sprite=22> +0"] }
+            , { "shuffle" : false, "initiative" : "52", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> +0", "Range <sprite=22> +0"] }
+            , { "shuffle" : true, "initiative" : "57", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> -1 %aoe-triangle-2-side%", "Range <sprite=22> +0"] }
+            , { "shuffle" : false, "initiative" : "27", "cardlines" : [ "Attack <sprite=20> +0", "Range <sprite=22> +0, %target% 2, Posion <sprite=48>"] }
+            , { "shuffle" : false, "initiative" : "87", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> +1", "Range <sprite=22> +0"] }
+            , { "shuffle" : false, "initiative" : "89", "cardlines" : [ "Attack <sprite=20> -2", "Range <sprite=22> +0", "** %stun%"] }
+            , { "shuffle" : false, "initiative" : "06", "cardlines" : [ "Shield <sprite=26> 2", "Heal <sprite=21> 2", "** Self", "Strengthen <sprite=8>", "** Self"] }
+            , { "shuffle" : true, "initiative" : "89", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> -2 %aoe-circle%", "Range <sprite=22> +0", "Posion <sprite=48>"] }
+            ]
+        },
+        { "monsterclass": "Stone Golem"
+        , "cards":
+            [ { "shuffle" : false, "initiative" : "11", "cardlines" : [ "Retaliate <sprite=28> 3", "Range <sprite=22> 3"] }
+            , { "shuffle" : false, "initiative" : "28", "cardlines" : [ "Move <sprite=23> +1", "Attack <sprite=20> +0", "* Stone Golem suffers 1 damage."] }
+            , { "shuffle" : true, "initiative" : "51", "cardlines" : [ "Move <sprite=23> +1", "Attack <sprite=20> -1"] }
+            , { "shuffle" : false, "initiative" : "65", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> +0"] }
+            , { "shuffle" : false, "initiative" : "72", "cardlines" : [ "Attack <sprite=20> +1", "Range <sprite=22> 3", "* Stone Golem suffers 2 damage"] }
+            , { "shuffle" : true, "initiative" : "90", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> +1"] }
+            , { "shuffle" : false, "initiative" : "28", "cardlines" : [ "Move <sprite=23> +1", "Attack <sprite=20> -2", "Range <sprite=22> 3", "* %pull% 2", "Immobilize <sprite=2>"] }
+            , { "shuffle" : false, "initiative" : "83", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> -1", "** Target all adjacent enemies"] }
+            ]
+        },
+        { "monsterclass": "Sun Demon"
+        , "cards":
+            [ { "shuffle" : true, "initiative" : "17", "cardlines" : [ "Heal <sprite=21> 3", "Range <sprite=22> 3", "*Light <sprite=12><sprite=15>: Target all allies within range"] }
+            , { "shuffle" : false, "initiative" : "36", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> +0", "** Target all adjacent enemies", "Light <sprite=12>"] }
+            , { "shuffle" : false, "initiative" : "36", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> +0", "** Target all adjacent enemies", "Light <sprite=12>"] }
+            , { "shuffle" : false, "initiative" : "68", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> +1", "Light <sprite=12>"] }
+            , { "shuffle" : true, "initiative" : "73", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> +1", "Light <sprite=12><sprite=15>: Heal <sprite=21> 3", "** Self"] }
+            , { "shuffle" : false, "initiative" : "95", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> +0", "Range <sprite=22> 4", "*Light <sprite=12><sprite=15>: Target all enemies within range"] }
+            , { "shuffle" : false, "initiative" : "88", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> -1", "** Target all adjacent enemies", "Dark <sprite=17><sprite=15>: Muddle <sprite=4>", "** Self"] }
+            , { "shuffle" : false, "initiative" : "50", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> +0", "Range <sprite=22> 3", "* %any%<sprite=15>: %light%"] }
+            ]
+        },
+        { "monsterclass": "Wind Demon"
+        , "cards":
+          [ { "shuffle" : false, "initiative" : "09", "cardlines" : [ "Attack <sprite=20> -1", "Range <sprite=22> +0", "Heal <sprite=21> 1", "** Self", "* %air%<sprite=15>: %invisible%<br/><span class='small'>Self</span>"] }
+            , { "shuffle" : true, "initiative" : "21", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> +0", "Range <sprite=22> +0, %pull% 1", "* %air%"] }
+            , { "shuffle" : true, "initiative" : "21", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> +0", "Range <sprite=22> +0, %pull% 1", "* %air%"] }
+            , { "shuffle" : false, "initiative" : "29", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> -1", "Range <sprite=22> +0, %target% 2", "** %air%<sprite=15>: %push% 2"] }
+            , { "shuffle" : false, "initiative" : "37", "cardlines" : [ "Move <sprite=23> +0", "Attack <sprite=20> +0 <div style='display: inline-block; width: 0; margin-top: -1.5em; vertical-align: bottom'>%aoe-4-with-black%</div>", "** %air%<sprite=15>: +1 Attack <div style='display: inline-block; margin-right: -3em'>%aoe-circle-with-side-black%</div>"] }
+            , { "shuffle" : false, "initiative" : "43", "cardlines" : [ "Move <sprite=23> -1", "Attack <sprite=20> +1", "Range <sprite=22> +0", "** %air%<sprite=15>: %target% 2"] }
+            , { "shuffle" : false, "initiative" : "43", "cardlines" : [ "Push <sprite=6> 1", "** Target all adjacent enemies", "Attack <sprite=20> +0", "Range <sprite=22> +0", "** %earth%<sprite=15>: -2 %range%"] }
+            , { "shuffle" : false, "initiative" : "02", "cardlines" : [ "Shield <sprite=26> 1", "Move <sprite=23> -1", "Attack <sprite=20> -1", "Range <sprite=22> +0", "* %any%<sprite=15>: %air%"] }
+            ]
+        }
+] }

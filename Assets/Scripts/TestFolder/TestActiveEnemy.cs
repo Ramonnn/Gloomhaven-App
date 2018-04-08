@@ -9,6 +9,15 @@ public class TestActiveEnemy : MonoBehaviour {
     public GameObject normal, elite;
     public TestMonsterPanel monsterPanel;
 
+    private void OnEnable()
+    {
+        TestMonster.Reset += UpdateToggles;
+    }
+    private void OnDisable()
+    {
+        TestMonster.Reset += UpdateToggles;
+    }
+
     public void SpawnNormal()
     {
         if (normalToggle.isOn)
@@ -37,5 +46,14 @@ public class TestActiveEnemy : MonoBehaviour {
             elite.SetActive(false);
         }
         monsterPanel.activeMonsters.Sort((p1, p2) => p1.name.CompareTo(p2.name));
+    }
+
+    public void UpdateToggles()
+    {
+        if (!elite.activeSelf && !normal.activeSelf)
+        {
+            eliteToggle.isOn = false;
+            normalToggle.isOn = false;
+        }
     }
 }

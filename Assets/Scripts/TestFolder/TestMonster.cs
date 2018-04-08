@@ -18,6 +18,17 @@ public class TestMonster : MonoBehaviour
     public int remainingHealth, maxHealth, shield;
     public bool poisoned, wounded, dazed, muddled, strengthend;
 
+    public delegate void ResetMonster();
+    public static event ResetMonster Reset;
+
+    public void ResetSubscriberCheck()
+    {
+        if (Reset != null)
+        {
+            Reset();
+        }
+    }
+
     private void OnDisable()
     {
         FreshEnemy();
@@ -36,6 +47,7 @@ public class TestMonster : MonoBehaviour
         remainingHealth = currentMonster.monsterHealth;
 
         healthText.text = maxHealth + "/" + maxHealth;
+        Reset();
 
         //Shield Deactivate. Retaliate Deactivate.
     }

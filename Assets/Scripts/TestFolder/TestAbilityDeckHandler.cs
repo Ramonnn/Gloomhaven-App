@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class TestAbilityDeckHandler : MonoBehaviour
 {
-    public Text initiative, monsterName, modifierLines;
+    public TextMeshProUGUI initiative, monsterName, modifierLines;
     public Image shuffleBool, cardBackground;
 
     public List<TestDeck> abilityDeck, discardPile;
@@ -23,6 +24,7 @@ public class TestAbilityDeckHandler : MonoBehaviour
         shuffleBool.enabled = false;
         int topDeck = Random.Range(0, abilityDeck.Count);
         currentCard = abilityDeck[topDeck];
+        gameObject.GetComponent<TestRegex>().IdentifyStat(currentCard);
         cardBackground.sprite = cardFront;
         initiative.text = currentCard.initiativeValue;
         monsterName.text = currentCard.monsterName;

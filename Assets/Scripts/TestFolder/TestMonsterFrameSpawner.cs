@@ -54,6 +54,22 @@ public class TestMonsterFrameSpawner : MonoBehaviour
                 monster.Value.currentNormals.monsterMove + "\n" + monster.Value.currentNormals.monsterAttack + "\n" +
                 monster.Value.currentNormals.monsterRange;
 
+            monsterFrame.GetComponentInChildren<TestRegex>().normalMonsterStats = new Dictionary<string, int>() {
+                { "health", monster.Value.currentNormals.monsterHealth },
+                { "attack", monster.Value.currentNormals.monsterHealth },
+                { "range", monster.Value.currentNormals.monsterHealth },
+                { "move", monster.Value.currentNormals.monsterHealth }
+                //could add all the stats...
+            };
+
+            monsterFrame.GetComponentInChildren<TestRegex>().eliteMonsterStats = new Dictionary<string, int>() {
+                { "health", monster.Value.currentElites.monsterHealth },
+                { "attack", monster.Value.currentElites.monsterHealth },
+                { "range", monster.Value.currentElites.monsterHealth },
+                { "move", monster.Value.currentElites.monsterHealth }
+                //could add all the stats...
+            };
+
             monsterFrame.abilityDeck = new List<TestDeck>(monster.Value.currentNormals.cardDeck);
 
             enemyFrames.Add(Instantiate(genericFrame, gameObject.transform));
