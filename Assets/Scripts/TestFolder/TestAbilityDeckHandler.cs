@@ -13,6 +13,16 @@ public class TestAbilityDeckHandler : MonoBehaviour
     public TestDeck currentCard;
     public Sprite cardFront, cardBack;
 
+    void OnEnable()
+    {
+        RoundTracker.UpdateInitiativeOrder += TestAbilityCardDraw;
+    }
+
+    void OnDisable()
+    {
+        RoundTracker.UpdateInitiativeOrder -= TestAbilityCardDraw;
+    }
+
     private void Start()
     {
         abilityDeck = gameObject.transform.parent.parent.GetComponent<TestMonsterFrame>().abilityDeck;
@@ -24,7 +34,6 @@ public class TestAbilityDeckHandler : MonoBehaviour
         shuffleBool.enabled = false;
         int topDeck = Random.Range(0, abilityDeck.Count);
         currentCard = abilityDeck[topDeck];
-        gameObject.GetComponent<TestRegex>().IdentifyStat(currentCard);
         cardBackground.sprite = cardFront;
         initiative.text = currentCard.initiativeValue;
         monsterName.text = currentCard.monsterName;

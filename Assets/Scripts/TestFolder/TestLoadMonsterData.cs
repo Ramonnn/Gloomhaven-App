@@ -134,7 +134,6 @@ public class TestLoadMonsterData : MonoBehaviour
         {
             if (image.name == "Horz-" + monstername)
             {
-                Debug.Log("found Image");
                 currentMonsterImage = image;
             }
         }

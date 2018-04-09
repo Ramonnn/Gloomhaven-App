@@ -7,7 +7,18 @@ public class RoundTracker : MonoBehaviour {
 
 
     public delegate void RoundProperties();
+    public static event RoundProperties UpdateInitiativeOrder;
     public static event RoundProperties TrackingRound;
+    public Button cardDealButton;
+
+    public void InitiativeUpdater() // execute this method on nextround click.
+    {
+        if (UpdateInitiativeOrder != null)
+        {
+            UpdateInitiativeOrder();
+        }
+        cardDealButton.interactable = false;
+    }
 
     public void RoundTrackerClick()
     {
@@ -39,10 +50,7 @@ public class RoundTracker : MonoBehaviour {
         int.TryParse(gameObject.transform.GetChild(1).transform.GetComponent<Text>().text, out roundNumber);
         roundNumber = roundNumber+1;
         gameObject.transform.GetChild(1).transform.GetComponent<Text>().text = roundNumber.ToString();
-    }
+        cardDealButton.interactable = true;
 
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    }
 }

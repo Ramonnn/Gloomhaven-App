@@ -5,7 +5,6 @@ using System.Text.RegularExpressions;
 
 public class TestRegex : MonoBehaviour
 {
-    public TestDeck currentCard;
     public Dictionary<string, int> normalMonsterStats;
     public Dictionary<string, int> eliteMonsterStats;
     public Dictionary<string, string> MACROS = new Dictionary<string, string>() {
@@ -57,53 +56,4 @@ public class TestRegex : MonoBehaviour
     , { "%wound%", "<span class='nobr'>WOUND <img class='icon' src='images/wound.svg'></span>" }
 
     };
-
-
-
-    public void IdentifyStat(TestDeck currentCard)
-    {
-        var regExp = new Regex("(\\*\\s\\% (attack | range | move)\\%)\\s\\+\\d");
-        for (int i = 0; i < currentCard.modifierLines.Count; i++)
-        {
-            Match match = regExp.Match("attack");
-            Debug.Log(match.Value);
-            //foreach (Match match in matches)
-            //{
-            //    if (matches[0].ToString() == "attack")
-            //    {
-            //        regExp.Replace(matches[0].ToString(), "<sprite=20>");
-            //    }
-            //    if (matches[0].ToString() == "move")
-            //    {
-            //        regExp.Replace(matches[0].ToString(), "<sprite=20>");
-            //    }
-            //    if (matches[0].ToString() == "range")
-            //    {
-            //        regExp.Replace(matches[0].ToString(), "<sprite=20>");
-            //    }
-            //}
-        }
-    }
-
-
-    //private void FindString(string stat)
-    //{
-    //    foreach (string line in currentCard.modifierLines)
-    //    {
-    //        var regExp = new Regex("%" + stat + "% (\\+|-)(\\d*)", RegexOptions.IgnoreCase);
-    //        regExp.Match(line);
-    //    }
-    //}
-    //// Use this for initialization
-    //void Start()
-    //{
-    //    currentCard = GetComponent<TestAbilityDeckHandler>().currentCard;
-    //    currentMonsters =
-    //}
-
-    //// Update is called once per frame
-    //void Update()
-    //{
-
-    //}
 }
