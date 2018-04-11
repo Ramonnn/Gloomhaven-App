@@ -7,9 +7,8 @@ using UnityEngine.UI;
 public class ElementsTracker : MonoBehaviour
 {
 
-    private List<GameObject> elementsTracker = new List<GameObject>();
+    public List<GameObject> elementsTracker = new List<GameObject>();
     private GameObject clickedElement;
-    public GameObject roundButton;
 
     void OnEnable()
     {
@@ -21,51 +20,20 @@ public class ElementsTracker : MonoBehaviour
         RoundTracker.TrackingRound -= UpdateElements;
     }
 
-    void Start()
-    {
-        foreach (Transform element in gameObject.transform.GetChild(0))
-        {
-            elementsTracker.Add(element.gameObject);
-        }
-    }
-
-
     public void UpdateElements()
     {
         for (int i = 0; i < elementsTracker.Count; i++)
         {
-            if (elementsTracker[i].GetComponent<Toggle>().isOn)
+            if (elementsTracker[i].GetComponent<Element>().eleSelected.enabled)
             {
-                elementsTracker[i].GetComponent<Toggle>().isOn = false;
-                elementsTracker[i].transform.GetChild(0).transform.gameObject.SetActive(true);
+                elementsTracker[i].GetComponent<Element>().eleSelected.enabled = false;
+                elementsTracker[i].GetComponent<Element>().eleWaning.enabled = true;
             }
-            else if (elementsTracker[i].transform.GetChild(0).transform.gameObject.activeSelf)
+            else if (elementsTracker[i].GetComponent<Element>().eleWaning.enabled)
             {
-                elementsTracker[i].transform.GetChild(0).transform.gameObject.SetActive(false);
+                elementsTracker[i].GetComponent<Element>().eleWaning.enabled = false;
             }
 
         }
-    }
-
-    public void ConsumeElement()
-    {
-        clickedElement = EventSystem.current.currentSelectedGameObject;
-        if (clickedElement.name != roundButton.name)
-        {
-            if (clickedElement.transform.GetChild(0).transform.gameObject.activeSelf && clickedElement.GetComponent<Toggle>().isOn == false)
-            {
-                clickedElement.transform.GetChild(0).transform.gameObject.SetActive(false);
-            }
-            else if (clickedElement.transform.GetChild(0).transform.gameObject.activeSelf == false && clickedElement.GetComponent<Toggle>().isOn == false)
-            {
-                clickedElement.transform.GetChild(0).transform.gameObject.SetActive(true);
-            }
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

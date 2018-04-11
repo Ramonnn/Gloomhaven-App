@@ -9,7 +9,7 @@ public class RoundTracker : MonoBehaviour {
     public delegate void RoundProperties();
     public static event RoundProperties UpdateInitiativeOrder;
     public static event RoundProperties TrackingRound;
-    public Button cardDealButton;
+    public Button cardDealButton, roundButton;
 
     public void InitiativeUpdater() // execute this method on nextround click.
     {
@@ -51,6 +51,7 @@ public class RoundTracker : MonoBehaviour {
         roundNumber = roundNumber+1;
         gameObject.transform.GetChild(1).transform.GetComponent<Text>().text = roundNumber.ToString();
         cardDealButton.interactable = true;
+        roundButton.interactable = false;
 
     }
 }

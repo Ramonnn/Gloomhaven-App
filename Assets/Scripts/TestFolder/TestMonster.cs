@@ -29,7 +29,7 @@ public class TestMonster : MonoBehaviour
         }
     }
 
-    private void OnDisable()
+    private void OnEnable()
     {
         FreshEnemy();
     }

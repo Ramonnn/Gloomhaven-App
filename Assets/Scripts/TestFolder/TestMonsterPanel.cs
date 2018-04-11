@@ -5,12 +5,23 @@ using UnityEngine.UI;
 
 public class TestMonsterPanel : MonoBehaviour
 {
-
+    public List<GameObject> panelBosses;
     public Types panelMonsters;
     public List<GameObject> activeMonsters = new List<GameObject>();
     private int final, current;
     public Text buttonText;
     public Button button;
+    public GameObject gridDynamic;
+
+    private void OnEnable()
+    {
+        RoundTracker.TrackingRound += RefreshTurn;
+    }
+
+    private void OnDisable()
+    {
+        RoundTracker.TrackingRound -= RefreshTurn;
+    }
 
     public void CycleThroughTurns()
     {
@@ -39,12 +50,19 @@ public class TestMonsterPanel : MonoBehaviour
                 //activeMonsters[current].GetComponent<TestMonster>().currentTurn.interactable = false;
                 buttonText.text = "Turn Complete";
                 button.interactable = false;
+                gridDynamic.GetComponent<TestMonsterFrameSpawner>().RefreshEnemies();
             }
             else
             {
                 current++;
             }
         }
+    }
+
+    public void RefreshTurn()
+    {
+        buttonText.text = "Start Turn";
+        button.interactable = true;
     }
 }
 

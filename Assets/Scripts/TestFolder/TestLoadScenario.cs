@@ -5,7 +5,7 @@ using SimpleJSON;
 
 public class TestLoadScenario : MonoBehaviour //Script Execution Order Adjusted -100 from default
 {
-    private string scenariosFileName = "scenarios.json";
+    private string scenariosFileName = "testscenarios.json";
     private JSONNode SCENARIOSTATS;
     public List<string> scenarioMonsters = new List<string>();
     public TestCurrentScenario currentScenario;

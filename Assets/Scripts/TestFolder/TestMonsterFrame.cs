@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class TestMonsterFrame: MonoBehaviour
 {
@@ -10,5 +11,6 @@ public class TestMonsterFrame: MonoBehaviour
     public Text monsterName;
     public Image monsterImage;
     public Button nextEnemy;
+    public TextMeshProUGUI attributesElite, attributesNormal;
 }
 

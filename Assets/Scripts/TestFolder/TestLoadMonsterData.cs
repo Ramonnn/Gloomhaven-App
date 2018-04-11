@@ -7,7 +7,7 @@ public class TestLoadMonsterData : MonoBehaviour
 { //Script Load is now -50. Need to check execution order later.
 
     private JSONNode MONSTERSTATS, DECKS;
-    private string monsterStatsFileName = "monsterstats.json";
+    private string monsterStatsFileName = "testmonsterstats.json";
     private string combinationsFileName = "monsters.json";
     //private string decksFileName = "decks.json";
     private string decksFileName = "testdecks.json";
@@ -27,9 +27,13 @@ public class TestLoadMonsterData : MonoBehaviour
 
     public Sprite[] monsterImages;
     private Sprite currentMonsterImage;
+    public Sprite[] bossImages;
 
     private List<string> normalAttri;
     private List<string> eliteAttri;
+    private List<string> bossImmu;
+    private List<string> bossSpecial1;
+    private List<string> bossSpecial2;
     private List<string> cardLines;
 
     private bool monsterFound;
@@ -137,6 +141,13 @@ public class TestLoadMonsterData : MonoBehaviour
                 currentMonsterImage = image;
             }
         }
+        foreach (Sprite image in bossImages)
+        {
+            if (image.name == monstername)
+            {
+                currentMonsterImage = image;
+            }
+        }
 
         foreach (JSONNode monsterdeck in DECKS["decks"])
         {
@@ -174,9 +185,9 @@ public class TestLoadMonsterData : MonoBehaviour
                 eliteAttri = new List<string>();
                 ElitesAndNormals elitesAndNormals = new ElitesAndNormals();
 
-                for (int i = 0; i < monster.Value["level"][PlayerPrefs.GetString("ChosenLevel")]["normal"]["attributes"].Count; i++)
+                for (int i = 0; i < monster.Value["level"][PlayerPrefs.GetInt("ChosenLevel")]["normal"]["attributes"].Count; i++)
                 {
-                    normalAttri.Add(monster.Value["level"][PlayerPrefs.GetString("ChosenLevel")]["normal"]["attributes"][i]);
+                    normalAttri.Add(monster.Value["level"][PlayerPrefs.GetInt("ChosenLevel")]["normal"]["attributes"][i]);
                 }
 
                 Normals = new TestCurrentMonsters
@@ -194,9 +205,9 @@ public class TestLoadMonsterData : MonoBehaviour
                 };
                 elitesAndNormals.currentNormals = Normals;
 
-                for (int i = 0; i < monster.Value["level"][PlayerPrefs.GetString("ChosenLevel")]["elite"]["attributes"].Count; i++)
+                for (int i = 0; i < monster.Value["level"][PlayerPrefs.GetInt("ChosenLevel")]["elite"]["attributes"].Count; i++)
                 {
-                    eliteAttri.Add(monster.Value["level"][PlayerPrefs.GetString("ChosenLevel")]["elite"]["attributes"][i]);
+                    eliteAttri.Add(monster.Value["level"][PlayerPrefs.GetInt("ChosenLevel")]["elite"]["attributes"][i]);
                 }
                 Elites = new TestCurrentMonsters
                 {
@@ -223,6 +234,21 @@ public class TestLoadMonsterData : MonoBehaviour
                     if (boss.Key == monstername)
                     {
                         monsterFound = true;
+                        bossImmu = new List<string>();
+                        bossSpecial1 = new List<string>();
+                        bossSpecial2 = new List<string>();
+                        for (int i = 0; i < boss.Value["level"][PlayerPrefs.GetInt("ChosenLevel")]["immunities"].Count; i++)
+                        {
+                            bossImmu.Add(boss.Value["level"][PlayerPrefs.GetInt("ChosenLevel")]["immunities"][i]);
+                        }
+                        for (int i = 0; i < boss.Value["level"][PlayerPrefs.GetInt("ChosenLevel")]["special1"].Count; i++)
+                        {
+                            bossSpecial1.Add(boss.Value["level"][PlayerPrefs.GetInt("ChosenLevel")]["special1"][i]);
+                        }
+                        for (int i = 0; i < boss.Value["level"][PlayerPrefs.GetInt("ChosenLevel")]["special2"].Count; i++)
+                        {
+                            bossSpecial2.Add(boss.Value["level"][PlayerPrefs.GetInt("ChosenLevel")]["special2"][i]);
+                        }
                         Bosses = new TestCurrentBosses
                         {
                             monsterName = monstername,
@@ -232,6 +258,9 @@ public class TestLoadMonsterData : MonoBehaviour
                             monsterMove = boss.Value["level"][PlayerPrefs.GetInt("ChosenLevel")]["move"],
                             monsterAttack = boss.Value["level"][PlayerPrefs.GetInt("ChosenLevel")]["attack"],
                             monsterRange = boss.Value["level"][PlayerPrefs.GetInt("ChosenLevel")]["range"],
+                            Special1 = bossSpecial1,
+                            Special2 = bossSpecial2,
+                            monsterImmunities = bossImmu,
                             monsterNotes = boss.Value["level"][PlayerPrefs.GetInt("ChosenLevel")]["notes"],
                             cardDeck = currentMonsterDeck
                         };

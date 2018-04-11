@@ -18,11 +18,12 @@ public class TestCalculatorHandler : MonoBehaviour
     public void OpenCalculator(GameObject relevant)
     {
         relevantEnemy = relevant.GetComponent<TestMonster>();
-        for (int i = 0; i < relevantEnemy.activeEnemyConditions.Count; i++)
+        for (int i = 0; i < conditions.Count; i++)
         {
-            if (relevantEnemy.activeEnemyConditions[i].activeSelf)
+            conditions[i].transform.GetChild(0).gameObject.SetActive(false);
+            if (relevantEnemy.enemyConditions[i].activeSelf)
             {
-                conditions[i].transform.GetChild(1).gameObject.SetActive(true);
+                conditions[i].transform.GetChild(0).gameObject.SetActive(true);
             }
         }
 

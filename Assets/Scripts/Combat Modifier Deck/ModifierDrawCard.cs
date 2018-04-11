@@ -8,7 +8,7 @@ public class ModifierDrawCard : MonoBehaviour
     public Sprite[] modifierImages;
     private Image modifier, shuffleIcon;
     public GameObject disAdvantage;
-    public List<ModifierCard> standardModifierDeck;
+    public List<ModifierCard> standardModifierDeck = new List<ModifierCard>();
     public List<ModifierCard> discardPile = new List<ModifierCard>();
     public ModifierCard curse, bless, stockCard;
     private ModifierCard currentCard;
@@ -17,11 +17,52 @@ public class ModifierDrawCard : MonoBehaviour
     private int topDeck;
     private Text monsterM;
 
-    void Start()
+    [System.Serializable]
+    public struct ModifierCard
     {
-        standardModifierDeck = new List<ModifierCard>(GetComponent<TestModifierDeck>().standardModifierDeck);
-        curse = GetComponent<TestModifierDeck>().availableModifierCards[1];
-        bless = GetComponent<TestModifierDeck>().availableModifierCards[0];
+        public string cardModifier;
+        public bool rollMod, shuffleDeck;
+
+    }
+    public List<ModifierCard> basicModifierDeck = new List<ModifierCard>() {
+        new ModifierCard { cardModifier = "Plus0", rollMod = false, shuffleDeck = false },
+        new ModifierCard { cardModifier = "Plus0", rollMod = false, shuffleDeck = false },
+        new ModifierCard { cardModifier = "Plus0", rollMod = false, shuffleDeck = false },
+        new ModifierCard { cardModifier = "Plus0", rollMod = false, shuffleDeck = false },
+        new ModifierCard { cardModifier = "Plus0", rollMod = false, shuffleDeck = false },
+        new ModifierCard { cardModifier = "Plus0", rollMod = false, shuffleDeck = false },
+        new ModifierCard { cardModifier = "Plus1", rollMod = false, shuffleDeck = false },
+        new ModifierCard { cardModifier = "Plus1", rollMod = false, shuffleDeck = false },
+        new ModifierCard { cardModifier = "Plus1", rollMod = false, shuffleDeck = false },
+        new ModifierCard { cardModifier = "Plus1", rollMod = false, shuffleDeck = false },
+        new ModifierCard { cardModifier = "Plus1", rollMod = false, shuffleDeck = false },
+        new ModifierCard { cardModifier = "Minus1", rollMod = false, shuffleDeck = false },
+        new ModifierCard { cardModifier = "Minus1", rollMod = false, shuffleDeck = false },
+        new ModifierCard { cardModifier = "Minus1", rollMod = false, shuffleDeck = false },
+        new ModifierCard { cardModifier = "Minus1", rollMod = false, shuffleDeck = false },
+        new ModifierCard { cardModifier = "Minus1", rollMod = false, shuffleDeck = false },
+        new ModifierCard { cardModifier = "Plus2", rollMod = false, shuffleDeck = false },
+        new ModifierCard { cardModifier = "Minus2", rollMod = false, shuffleDeck = false },
+        new ModifierCard { cardModifier = "Null", rollMod = false, shuffleDeck = true},
+        new ModifierCard { cardModifier = "Double", rollMod = false, shuffleDeck = true } };
+
+    public List<ModifierCard> availableModifierCards = new List<ModifierCard>() {
+        new ModifierCard { cardModifier = "Bless", rollMod = false, shuffleDeck = false },
+        new ModifierCard { cardModifier = "Curse", rollMod = false, shuffleDeck = false },
+        new ModifierCard { cardModifier = "Plus0", rollMod = false, shuffleDeck = false },
+        new ModifierCard { cardModifier = "Plus1", rollMod = false, shuffleDeck = false },
+        new ModifierCard { cardModifier = "Plus2", rollMod = false, shuffleDeck = false },
+        new ModifierCard { cardModifier = "Minus1", rollMod = false, shuffleDeck = false },
+        new ModifierCard { cardModifier = "Minus2", rollMod = false, shuffleDeck = false },
+        new ModifierCard { cardModifier = "Null", rollMod = false, shuffleDeck = true },
+        new ModifierCard { cardModifier = "Double", rollMod = false, shuffleDeck = true } };
+
+
+void Start()
+    {
+        standardModifierDeck = basicModifierDeck;
+        curse = availableModifierCards[1];
+        bless = availableModifierCards[0];
         modifier = modifierDeck.transform.GetChild(0).GetComponent<Image>();
         shuffleIcon = modifierDeck.transform.GetChild(1).GetComponent<Image>();
         monsterM = modifierDeck.transform.GetChild(2).GetComponent<Text>();
@@ -45,8 +86,6 @@ public class ModifierDrawCard : MonoBehaviour
 
     public void DrawModifier()
     {
-
-
         topDeck = Random.Range(0, standardModifierDeck.Count);
         currentCard = standardModifierDeck[topDeck];
 

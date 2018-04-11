@@ -8,8 +8,10 @@ public class TestMonsterFrameSpawner : MonoBehaviour
 
     public TestLoadMonsterData monsterData;
     public List<GameObject> enemyFrames = new List<GameObject>();
-
-    public GameObject genericFrame;
+    public List<bool> endRound = new List<bool>();
+    public Button roundButton;
+    public int turnPassed = 0;
+    public GameObject genericFrame, genericBossFrame;
 
     void OnEnable()
     {
@@ -30,7 +32,16 @@ public class TestMonsterFrameSpawner : MonoBehaviour
             TestMonsterFrame monsterFrame = genericFrame.GetComponent<TestMonsterFrame>();
             monsterFrame.monsterName.text = monster.Key;
             monsterFrame.monsterImage.sprite = monster.Value.currentElites.monsterImage;
-
+            monsterFrame.attributesElite.text = "";
+            monsterFrame.attributesNormal.text = "";
+            foreach (string line in monster.Value.currentElites.attributes)
+            {
+                monsterFrame.attributesElite.text = monsterFrame.attributesElite.text + " " + line + "\n";
+            }
+            foreach (string line in monster.Value.currentNormals.attributes)
+            {
+                monsterFrame.attributesNormal.text = monsterFrame.attributesNormal.text + line + "\n";
+            }
             foreach (GameObject popupmonster in monsterFrame.monsterPopUp.GetComponent<TestAddMonsterPopUp>().popUpMonsters)
             {
                 popupmonster.GetComponent<Image>().sprite = monster.Value.currentElites.monsterImage;
@@ -46,6 +57,7 @@ public class TestMonsterFrameSpawner : MonoBehaviour
             }
 
             genericFrame.name = monster.Key;
+            genericFrame.GetComponentInChildren<TestMonsterPanel>().gridDynamic = gameObject;
 
             monsterFrame.staticElite.GetComponentInChildren<Text>().text = monster.Value.currentElites.monsterHealth + "\n" +
                 monster.Value.currentElites.monsterMove + "\n" + monster.Value.currentElites.monsterAttack + "\n" +
@@ -55,28 +67,58 @@ public class TestMonsterFrameSpawner : MonoBehaviour
                 monster.Value.currentNormals.monsterMove + "\n" + monster.Value.currentNormals.monsterAttack + "\n" +
                 monster.Value.currentNormals.monsterRange;
 
-            monsterFrame.GetComponentInChildren<TestRegex>().normalMonsterStats = new Dictionary<string, int>() {
-                { "health", monster.Value.currentNormals.monsterHealth },
-                { "attack", monster.Value.currentNormals.monsterHealth },
-                { "range", monster.Value.currentNormals.monsterHealth },
-                { "move", monster.Value.currentNormals.monsterHealth }
-                //could add all the stats...
-            };
-
-            monsterFrame.GetComponentInChildren<TestRegex>().eliteMonsterStats = new Dictionary<string, int>() {
-                { "health", monster.Value.currentElites.monsterHealth },
-                { "attack", monster.Value.currentElites.monsterHealth },
-                { "range", monster.Value.currentElites.monsterHealth },
-                { "move", monster.Value.currentElites.monsterHealth }
-                //could add all the stats...
-            };
-
             monsterFrame.abilityDeck = new List<TestDeck>(monster.Value.currentNormals.cardDeck);
 
             enemyFrames.Add(Instantiate(genericFrame, gameObject.transform));
 
         }
-            RoundTracker.UpdateInitiativeOrder += SetInitiativeOrder;
+        foreach (KeyValuePair<string, TestCurrentBosses> boss in monsterData.currentBosses)
+        {
+            Debug.Log("Spawning Deck For " + boss.Key);
+            TestBossFrame bossFrame = genericBossFrame.GetComponent<TestBossFrame>();
+            bossFrame.monsterName.text = boss.Key;
+            bossFrame.monsterImage.sprite = boss.Value.monsterImage;
+            bossFrame.special1Boss.text = "Special 1: ";
+            bossFrame.special2Boss.text = "Special 2: ";
+            bossFrame.immunities.text = "<size=1>Immunities:</size> ";
+            bossFrame.notes.text = "Notes: ";
+            foreach (string line in boss.Value.monsterImmunities)
+            {
+                bossFrame.immunities.text = bossFrame.immunities.text + line + "\n";
+            }
+            foreach (string line in boss.Value.Special1)
+            {
+                bossFrame.special1Boss.text = bossFrame.special1Boss.text + line + "\n";
+            }
+            foreach (string line in boss.Value.Special2)
+            {
+                bossFrame.special2Boss.text = bossFrame.special2Boss.text + line + "\n";
+            }
+
+            if (boss.Value.monsterNotes != "")
+            {
+                bossFrame.notes.text = bossFrame.notes.text + "\n" + boss.Value.monsterNotes;
+            }
+            foreach (GameObject popupboss in bossFrame.monsterPopUp.GetComponent<TestAddMonsterPopUp>().popUpMonsters)
+            {
+                popupboss.GetComponent<Image>().sprite = boss.Value.monsterImage;
+            }
+            foreach (GameObject panelboss in bossFrame.monsterPanel.GetComponent<TestMonsterPanel>().panelBosses)
+            {
+                panelboss.GetComponent<TestBoss>().currentBoss = boss.Value;
+            }
+            genericBossFrame.GetComponentInChildren<TestMonsterPanel>().gridDynamic = gameObject;
+            genericBossFrame.name = boss.Key;
+
+            bossFrame.GetComponent<TestBossFrame>().staticBoss.text = boss.Value.monsterHealth + "\n" +
+                boss.Value.monsterMove + "\n" + boss.Value.monsterAttack + "\n" +
+                boss.Value.monsterRange;
+
+            bossFrame.abilityDeck = new List<TestDeck>(boss.Value.cardDeck);
+
+            enemyFrames.Add(Instantiate(genericBossFrame, gameObject.transform));
+        }
+        RoundTracker.UpdateInitiativeOrder += SetInitiativeOrder;
     }
 
     public void SetInitiativeOrder()
@@ -93,6 +135,24 @@ public class TestMonsterFrameSpawner : MonoBehaviour
                 }
 
             }
+        }
+    }
+
+    public void RefreshEnemies()
+    {
+        int activeEnemies = 0;
+        turnPassed = turnPassed + 1;
+        foreach (GameObject enemy in enemyFrames)
+        {
+            if (enemy.activeSelf)
+            {
+                activeEnemies = activeEnemies + 1;
+            }
+        }
+        if (turnPassed == activeEnemies)
+        {
+            roundButton.interactable = true;
+            turnPassed = 0;
         }
     }
 }
