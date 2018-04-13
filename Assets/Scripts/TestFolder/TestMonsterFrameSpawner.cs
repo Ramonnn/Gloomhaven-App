@@ -11,7 +11,7 @@ public class TestMonsterFrameSpawner : MonoBehaviour
     public List<bool> endRound = new List<bool>();
     public Button roundButton;
     public int turnPassed = 0;
-    public GameObject genericFrame, genericBossFrame;
+    public GameObject genericFrame, genericBossFrame, portrait, portraitSpawnContainer;
 
     void OnEnable()
     {
@@ -68,6 +68,7 @@ public class TestMonsterFrameSpawner : MonoBehaviour
 
             monsterFrame.abilityDeck = new List<TestDeck>(monster.Value.currentNormals.cardDeck);
 
+
             enemyFrames.Add(Instantiate(genericFrame, gameObject.transform));
 
         }
@@ -117,7 +118,23 @@ public class TestMonsterFrameSpawner : MonoBehaviour
 
             enemyFrames.Add(Instantiate(genericBossFrame, gameObject.transform));
         }
+        foreach (GameObject enemyFrame in enemyFrames)
+        {
+            portrait.GetComponent<OnOffPortraits>().enemyFrame = enemyFrame;
+            if (enemyFrame.GetComponent<TestMonsterFrame>() != null)
+            {
+                portrait.GetComponent<OnOffPortraits>().deselectedPortrait.sprite = enemyFrame.GetComponent<TestMonsterFrame>().monsterImage.sprite;
+                portrait.GetComponent<OnOffPortraits>().selectedPortrait.sprite = enemyFrame.GetComponent<TestMonsterFrame>().monsterImage.sprite;
+            }
+            else
+            {
+                portrait.GetComponent<OnOffPortraits>().deselectedPortrait.sprite = enemyFrame.GetComponent<TestBossFrame>().monsterImage.sprite;
+                portrait.GetComponent<OnOffPortraits>().selectedPortrait.sprite = enemyFrame.GetComponent<TestBossFrame>().monsterImage.sprite;
+            }
+            Instantiate(portrait, portraitSpawnContainer.transform);
+        }
     }
+
 
     public void SetInitiativeOrder()
     {
