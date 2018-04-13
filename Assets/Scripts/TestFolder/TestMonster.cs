@@ -182,7 +182,7 @@ public class TestMonster : MonoBehaviour
                         waningConditions.Add(condition);
                         break;
                     case "Strengthend":
-                       strengthend = true;
+                        strengthend = true;
                         waningConditions.Add(condition);
                         break;
                     case "Invisible":

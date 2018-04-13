@@ -15,17 +15,24 @@ public class TestAbilityDeckHandler : MonoBehaviour
 
     void OnEnable()
     {
-        RoundTracker.UpdateInitiativeOrder += TestAbilityCardDraw;
+        RoundTracker.DrawAbilityCard += TestAbilityCardDraw;
     }
 
     void OnDisable()
     {
-        RoundTracker.UpdateInitiativeOrder -= TestAbilityCardDraw;
+        RoundTracker.DrawAbilityCard -= TestAbilityCardDraw;
     }
 
     private void Start()
     {
-        abilityDeck = gameObject.transform.parent.parent.GetComponent<TestMonsterFrame>().abilityDeck;
+        if (gameObject.transform.parent.parent.GetComponent<TestBossFrame>() != null)
+        {
+            abilityDeck = gameObject.transform.parent.parent.GetComponent<TestBossFrame>().abilityDeck;
+        }
+        else
+        {
+            abilityDeck = gameObject.transform.parent.parent.GetComponent<TestMonsterFrame>().abilityDeck;
+        }
     }
 
     public void TestAbilityCardDraw()

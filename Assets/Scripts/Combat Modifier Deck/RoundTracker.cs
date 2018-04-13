@@ -7,15 +7,15 @@ public class RoundTracker : MonoBehaviour {
 
 
     public delegate void RoundProperties();
-    public static event RoundProperties UpdateInitiativeOrder;
+    public static event RoundProperties DrawAbilityCard;
     public static event RoundProperties TrackingRound;
     public Button cardDealButton, roundButton;
 
-    public void InitiativeUpdater() // execute this method on nextround click.
+    public void NewAbilityCards()
     {
-        if (UpdateInitiativeOrder != null)
+        if (DrawAbilityCard != null)
         {
-            UpdateInitiativeOrder();
+            DrawAbilityCard();
         }
         cardDealButton.interactable = false;
     }

@@ -57,6 +57,12 @@ public class TestMonsterPanel : MonoBehaviour
                 current++;
             }
         }
+        else
+        {
+            buttonText.text = "No Monsters";
+            button.interactable = false;
+            gridDynamic.GetComponent<TestMonsterFrameSpawner>().RefreshEnemies();
+        }
     }
 
     public void RefreshTurn()

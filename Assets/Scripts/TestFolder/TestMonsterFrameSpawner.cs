@@ -21,7 +21,6 @@ public class TestMonsterFrameSpawner : MonoBehaviour
     void OnDisable()
     {
         TestLoadMonsterData.UpdateScene -= SpawnMonsterFrame;
-        RoundTracker.UpdateInitiativeOrder -= SetInitiativeOrder;
     }
 
     void SpawnMonsterFrame()
@@ -118,12 +117,11 @@ public class TestMonsterFrameSpawner : MonoBehaviour
 
             enemyFrames.Add(Instantiate(genericBossFrame, gameObject.transform));
         }
-        RoundTracker.UpdateInitiativeOrder += SetInitiativeOrder;
     }
 
     public void SetInitiativeOrder()
     {
-        enemyFrames.Sort((p1, p2) => p1.transform.GetChild(0).transform.GetChild(2).GetComponent<TestAbilityDeckHandler>().currentCard.initiativeValue.CompareTo(p2.transform.GetChild(0).transform.GetChild(2).GetComponent<TestAbilityDeckHandler>().currentCard.initiativeValue));
+        enemyFrames.Sort((p1, p2) => p1.transform.GetChild(0).transform.GetComponentInChildren<TestAbilityDeckHandler>().currentCard.initiativeValue.CompareTo(p2.transform.GetChild(0).transform.GetComponentInChildren<TestAbilityDeckHandler>().currentCard.initiativeValue));
 
         for (int i = 0; i < gameObject.transform.childCount; i++)
         {
