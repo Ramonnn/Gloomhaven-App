@@ -80,10 +80,11 @@ public class TestLoadMonsterData : MonoBehaviour
         SceneUpdater();
     }
 
-    void LoadJSONFiles()
+    void LoadJSONFiles() //void
     {
         string combinationsPath = Path.Combine(Application.streamingAssetsPath, combinationsFileName);
         string monsterPath = Path.Combine(Application.streamingAssetsPath, monsterStatsFileName);
+        string deckPath = Path.Combine(Application.streamingAssetsPath, decksFileName);
 
         if (File.Exists(combinationsPath))
         {
@@ -100,12 +101,12 @@ public class TestLoadMonsterData : MonoBehaviour
             string monstersAsJson = File.ReadAllText(monsterPath);
             MONSTERSTATS = JSON.Parse(monstersAsJson);
         }
-
         else
         {
             Debug.LogError("Cannot load MonsterStats data!");
         }
-        string deckPath = Path.Combine(Application.streamingAssetsPath, decksFileName);
+
+
         if (File.Exists(deckPath))
         {
             string deckAsJson = File.ReadAllText(deckPath);
@@ -115,6 +116,7 @@ public class TestLoadMonsterData : MonoBehaviour
         {
             Debug.LogError("Cannot load Deck data!");
         }
+
     }
 
     private void LoadCombinations(List<string> scenariomonsters)
